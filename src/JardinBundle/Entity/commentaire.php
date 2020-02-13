@@ -20,6 +20,11 @@ class commentaire
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="evenement", inversedBy="event")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $comments;
 
     /**
      * @var \DateTime
@@ -94,5 +99,22 @@ class commentaire
     {
         return $this->contenu;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
 }
 

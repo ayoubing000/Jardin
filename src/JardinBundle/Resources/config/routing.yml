@@ -9,3 +9,9 @@ user_home:
 events_feature:
     resource: "@JardinBundle/Resources/config/routing/events.yml"
     prefix:   /dashboard/events
+events:
+    resource: "@JardinBundle/Resources/config/routing/evenement.yml"
+    prefix:   /events
+commentaire:
+    resource: "@JardinBundle/Resources/config/routing/commentaire.yml"
+    prefix:   /commentaire

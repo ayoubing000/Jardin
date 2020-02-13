@@ -20,6 +20,18 @@ class evenement
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="event")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="commentaire", mappedBy="comments")
+     * @ORM\JoinColumn(name="comm_id", referencedColumnName="id")
+     */
+
+    private $event;
 
     /**
      * @var string
@@ -217,5 +229,38 @@ class evenement
     {
         return $this->description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
 }
 

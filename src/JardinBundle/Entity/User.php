@@ -23,18 +23,16 @@ class User extends FosUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="enfant",mappedBy="parent")
+     * @ORM\ManyToOne(targetEntity="evenement", inversedBy="parent")
+     * @ORM\JoinColumn(name="evennement_id", referencedColumnName="id")
      */
-
-    private $enfants;
-
+    private $event;
 
     public function __construct()
     {
         parent::__construct();
         $this->enfants=new ArrayCollection();
     }
-
 
     /**
      * Sets the email.
@@ -50,38 +48,6 @@ class User extends FosUser
     }
 
     /**
-     * @return mixed
-     */
-    public function getParen()
-    {
-        return $this->paren;
-    }
-
-    /**
-     * @param mixed $paren
-     */
-    public function setParen($paren)
-    {
-        $this->paren = $paren;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFactures()
-    {
-        return $this->factures;
-    }
-
-    /**
-     * @param mixed $factures
-     */
-    public function setFactures($factures)
-    {
-        $this->factures = $factures;
-    }
-
-    /**
      * Set the canonical email.
      *
      * @param string $emailCanonical
@@ -93,6 +59,23 @@ class User extends FosUser
 
         return parent::setEmailCanonical($emailCanonical);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
 
 
 }
