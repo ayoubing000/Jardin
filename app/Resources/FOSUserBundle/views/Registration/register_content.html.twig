@@ -37,7 +37,8 @@
                             {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'form.password_confirmation'|trans } }) }}
                         </div>
                         <input class="button" id="btn-rg" type="submit" value="{{ 'registration.submit'|trans }}" />
-                    {{ form_end(form) }}
+                    {{ form_widget(form._token, {'attr':{'hidden':'true'}}) }}
+                    {{ form_end(form,{'render_rest': false}) }}
                 </div>
             </div>
         </div>

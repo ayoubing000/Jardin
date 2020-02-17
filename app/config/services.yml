@@ -33,3 +33,27 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    app.exception_subscriber:
+        public: true
+        class: JardinBundle\Event\Subscriber\UserDefaultRole
+        tags:
+            - { name:kernel.event_subscriber }
+
+    JardinBundle\Controller\UserController:
+        tags: ['controller.service_arguments']
+        arguments:
+            $eventDispatcher: '@event_dispatcher'
+            $formFactory: '@fos_user.registration.form.factory'
+            $userManager: '@fos_user.user_manager'
+
+    JardinBundle\Event\Subscriber\UserDefaultRole:
+        arguments:
+            $authorizationChecker: '@security.authorization_checker'
+
+
+#    app.form_extension.guard:
+#        class: AppBundle\Form\Extension\GuardExtension
+#        arguments: ['@security.authorization_checker']
+#        tags:
+#            - { name: 'form.type_extension', extended_type: 'Symfony\Component\Form\Extension\Core\Type\FormType' }

@@ -4,6 +4,7 @@
 namespace JardinBundle\Redirection;
 
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
 {
+    private $logger;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
@@ -36,13 +38,12 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
     {
         $roles =$token->getRoles();
         $rolesNames = array_map(function($role){return $role->getRole();}, $roles);
-
-
-        #var_dump($roles);
-        if (in_array('ROLE_ADMIN', $rolesNames, true)){
-            $redirection = new RedirectResponse($this->router->generate('user_home'));
+        var_dump($rolesNames);
+        if (in_array('ROLE_ADMIN', $rolesNames, true) ||
+            in_array('ROLE_SUPER_ADMIN', $rolesNames,true)  ){
+            $redirection = new RedirectResponse($this->router->generate('dashboard_home'));
         }else{
-            $redirection = new RedirectResponse($this->router->generate('events_list'));
+            $redirection = new RedirectResponse($this->router->generate('parent_home'));
         }
 
 

@@ -5,12 +5,12 @@ namespace JardinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * evenement
+ * Evenement
  *
  * @ORM\Table(name="evenement")
  * @ORM\Entity(repositoryClass="JardinBundle\Repository\evenementRepository")
  */
-class evenement
+class Evenement
 {
     /**
      * @var int
@@ -20,18 +20,18 @@ class evenement
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="event")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     */
-    private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="commentaire", mappedBy="comments")
-     * @ORM\JoinColumn(name="comm_id", referencedColumnName="id")
+     *
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="evenement")
+     *
      */
+    private $commentaires;
 
-    private $event;
+    /**
+     * @ORM\OneToMany(targetEntity="InscriptionEvenement", mappedBy="evenement")
+     */
+    private $inscriptionEvenements;
 
     /**
      * @var string
@@ -43,7 +43,7 @@ class evenement
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -75,10 +75,14 @@ class evenement
      */
     private $description;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -87,22 +91,46 @@ class evenement
     }
 
     /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return evenement
+     * @param int $id
      */
-    public function setTitre($titre)
+    public function setId($id)
     {
-        $this->titre = $titre;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get titre
-     *
+     * @return mixed
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * @param mixed $commentaires
+     */
+    public function setCommentaires($commentaires)
+    {
+        $this->commentaires = $commentaires;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInscriptionEvenements()
+    {
+        return $this->inscriptionEvenements;
+    }
+
+    /**
+     * @param mixed $inscriptionEvenements
+     */
+    public function setInscriptionEvenements($inscriptionEvenements)
+    {
+        $this->inscriptionEvenements = $inscriptionEvenements;
+    }
+
+    /**
      * @return string
      */
     public function getTitre()
@@ -111,22 +139,14 @@ class evenement
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return evenement
+     * @param string $titre
      */
-    public function setImage($image)
+    public function setTitre($titre)
     {
-        $this->image = $image;
-
-        return $this;
+        $this->titre = $titre;
     }
 
     /**
-     * Get image
-     *
      * @return string
      */
     public function getImage()
@@ -135,22 +155,14 @@ class evenement
     }
 
     /**
-     * Set dateDebut
-     *
-     * @param \DateTime $dateDebut
-     *
-     * @return evenement
+     * @param string $image
      */
-    public function setDateDebut($dateDebut)
+    public function setImage($image)
     {
-        $this->dateDebut = $dateDebut;
-
-        return $this;
+        $this->image = $image;
     }
 
     /**
-     * Get dateDebut
-     *
      * @return \DateTime
      */
     public function getDateDebut()
@@ -159,22 +171,14 @@ class evenement
     }
 
     /**
-     * Set dateFin
-     *
-     * @param \DateTime $dateFin
-     *
-     * @return evenement
+     * @param \DateTime $dateDebut
      */
-    public function setDateFin($dateFin)
+    public function setDateDebut($dateDebut)
     {
-        $this->dateFin = $dateFin;
-
-        return $this;
+        $this->dateDebut = $dateDebut;
     }
 
     /**
-     * Get dateFin
-     *
      * @return \DateTime
      */
     public function getDateFin()
@@ -183,22 +187,14 @@ class evenement
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return evenement
+     * @param \DateTime $dateFin
      */
-    public function setType($type)
+    public function setDateFin($dateFin)
     {
-        $this->type = $type;
-
-        return $this;
+        $this->dateFin = $dateFin;
     }
 
     /**
-     * Get type
-     *
      * @return string
      */
     public function getType()
@@ -207,22 +203,14 @@ class evenement
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return evenement
+     * @param string $type
      */
-    public function setDescription($description)
+    public function setType($type)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->type = $type;
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -231,35 +219,27 @@ class evenement
     }
 
     /**
-     * @return mixed
+     * @param string $description
      */
-    public function getParent()
+    public function setDescription($description)
     {
-        return $this->parent;
+        $this->description = $description;
     }
 
     /**
-     * @param mixed $parent
+     * @return bool
      */
-    public function setParent($parent)
+    public function isActive()
     {
-        $this->parent = $parent;
+        return $this->active;
     }
 
     /**
-     * @return mixed
+     * @param bool $active
      */
-    public function getEvent()
+    public function setActive($active)
     {
-        return $this->event;
-    }
-
-    /**
-     * @param mixed $event
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
+        $this->active = $active;
     }
 
 }

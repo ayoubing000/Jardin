@@ -3912,3 +3912,6 @@ h3.timeline-title {
     border-right: 3px solid #ff3eab;
     border-top: 3px solid #ff3eab;
 }
+.nav-second-level li a, .nav-thrid-level li a{
+    padding-left: 0!important;
+}

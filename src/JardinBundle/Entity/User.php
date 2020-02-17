@@ -22,11 +22,11 @@ class User extends FosUser
      */
     protected $id;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="evenement", inversedBy="parent")
-     * @ORM\JoinColumn(name="evennement_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="InscriptionEvenement", mappedBy="user")
      */
-    private $event;
+    private $inscriptionEvenements;
 
     public function __construct()
     {
@@ -61,19 +61,11 @@ class User extends FosUser
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEvent()
+    public function getUsername()
     {
-        return $this->event;
-    }
-
-    /**
-     * @param mixed $event
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
+        return $this->username;
     }
 
 

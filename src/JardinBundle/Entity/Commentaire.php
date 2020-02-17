@@ -5,12 +5,12 @@ namespace JardinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * commentaire
+ * Commentaire
  *
  * @ORM\Table(name="commentaire")
  * @ORM\Entity(repositoryClass="JardinBundle\Repository\commentaireRepository")
  */
-class commentaire
+class Commentaire
 {
     /**
      * @var int
@@ -21,15 +21,21 @@ class commentaire
      */
     private $id;
     /**
-     * @ORM\ManyToOne(targetEntity="evenement", inversedBy="event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\JoinColumn(name="evenement_id", referencedColumnName="id")
      */
-    private $comments;
+    private $evenement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="creation_date", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $date;
 
@@ -115,6 +121,40 @@ class commentaire
     {
         $this->comments = $comments;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEvenement()
+    {
+        return $this->evenement;
+    }
+
+    /**
+     * @param mixed $evenement
+     */
+    public function setEvenement($evenement)
+    {
+        $this->evenement = $evenement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 
 }
 

@@ -2,16 +2,20 @@ jardin_homepage:
     path:     /
     defaults: { _controller: JardinBundle:Default:index }
 
-user_home:
-    path:       /user-home
-    defaults:   {_controller: JardinBundle:Main:userHome }
+parent_home:
+    path:       /parent-home
+    defaults:   {_controller: JardinBundle:Main:parentHome }
 
-events_feature:
-    resource: "@JardinBundle/Resources/config/routing/events.yml"
-    prefix:   /dashboard/events
-events:
+dashboard_home:
+    path:       /dashboard
+    defaults:   {_controller: JardinBundle:Main:dashboardHome }
+
+enseignant_home:
+    path:       /enseignant-home
+    defaults: {_controller: JardinBundle:Main:enseignantHome}
+evenement_feature:
     resource: "@JardinBundle/Resources/config/routing/evenement.yml"
-    prefix:   /events
-commentaire:
-    resource: "@JardinBundle/Resources/config/routing/commentaire.yml"
-    prefix:   /commentaire
+    prefix:   /dashboard/events
+
+
+

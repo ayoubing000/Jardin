@@ -8,8 +8,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MainController extends  Controller
 {
-    public function userHomeAction(){
+    public function parentHomeAction(){
         $username=(string) $this->getUser();
-        return $this->render('JardinBundle:User:home.html.twig',array('username'=> $username));
+        return $this->render('JardinBundle:Parent:index.html.twig',array('username'=> $username));
+    }
+
+    public function enseignantHomeAction(){
+        $username=(string) $this->getUser();
+        return $this->render('JardinBundle:Enseignant:index.html.twig',array('username'=> $username));
+    }
+
+    public function dashboardHomeAction(){
+        $username=(string) $this->getUser();
+        return $this->render('JardinBundle:dashboard:index.html.twig',array('username'=> $username));
     }
 }
