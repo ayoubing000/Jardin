@@ -57,26 +57,19 @@ class enfant
     private $age;
 
     /**
-     * @ORM\ManyToOne(targetEntity="abonnement")
-     * @ORM\JoinColumn(name="matricul_abn",referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="abonnement", inversedBy="enfant")
+     * @ORM\JoinColumn(name="matricul_abn", referencedColumnName="id")
      */
 
     private  $abonnment;
-    /**
-     * @return mixed
-     */
-    public function getAbonnments()
-    {
-        return $this->abonnment;
-    }
 
     /**
-     * @param mixed $abonnments
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="enfants")
+     * @ORM\JoinColumn(name="matricul_prt", referencedColumnName="id")
      */
-    public function setAbonnments($abonnments)
-    {
-        $this->abonnments = $abonnments;
-    }
+
+    private  $parents;
+
 
     /**
      * Get id
@@ -207,5 +200,38 @@ class enfant
     {
         return $this->age;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAbonnment()
+    {
+        return $this->abonnment;
+    }
+
+    /**
+     * @param mixed $abonnment
+     */
+    public function setAbonnment($abonnment)
+    {
+        $this->abonnment = $abonnment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parents;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parents)
+    {
+        $this->parents = $parents;
+    }
+
 }
 

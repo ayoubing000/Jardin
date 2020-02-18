@@ -5,12 +5,12 @@ namespace JardinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * club
+ * Abonnmentad
  *
- * @ORM\Table(name="club")
- * @ORM\Entity(repositoryClass="JardinBundle\Repository\clubRepository")
+ * @ORM\Table(name="abonnmentad")
+ * @ORM\Entity(repositoryClass="JardinBundle\Repository\AbonnmentadRepository")
  */
-class club
+class Abonnmentad
 {
     /**
      * @var int
@@ -21,20 +21,19 @@ class club
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Description", type="string", length=255)
+     */
+    private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="Prix", type="float")
      */
-    private $nom;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="activite", type="array")
-     */
-    private $activite;
+    private $prix;
 
     /**
      * @var string
@@ -55,51 +54,51 @@ class club
     }
 
     /**
-     * Set nom
+     * Set description
      *
-     * @param string $nom
+     * @param string $description
      *
-     * @return club
+     * @return Abonnmentad
      */
-    public function setNom($nom)
+    public function setDescription($description)
     {
-        $this->nom = $nom;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get description
      *
      * @return string
      */
-    public function getNom()
+    public function getDescription()
     {
-        return $this->nom;
+        return $this->description;
     }
 
     /**
-     * Set activite
+     * Set prix
      *
-     * @param string $activite
+     * @param string $prix
      *
-     * @return club
+     * @return Abonnmentad
      */
-    public function setActivite($activite)
+    public function setPrix($prix)
     {
-        $this->activite = $activite;
+        $this->prix = $prix;
 
         return $this;
     }
 
     /**
-     * Get activite
+     * Get prix
      *
      * @return string
      */
-    public function getActivite()
+    public function getPrix()
     {
-        return $this->activite;
+        return $this->prix;
     }
 
     /**
@@ -107,7 +106,7 @@ class club
      *
      * @param string $type
      *
-     * @return club
+     * @return Abonnmentad
      */
     public function setType($type)
     {

@@ -24,23 +24,23 @@ class message
     /**
      * @var string
      *
-     * @ORM\Column(name="adr_dest", type="string", length=255)
+     * @ORM\Column(name="Subject", type="string", length=255)
      */
-    private $adrDest;
+    private $subject;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adr_src", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255)
      */
-    private $adrSrc;
+    private $mail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=255, nullable=true)
+     * @ORM\Column(name="object", type="string", length=255)
      */
-    private $contenu;
+    private $object;
 
 
     /**
@@ -54,75 +54,75 @@ class message
     }
 
     /**
-     * Set adrDest
+     * Set subject
      *
-     * @param string $adrDest
+     * @param string $subject
      *
      * @return message
      */
-    public function setAdrDest($adrDest)
+    public function setSubject($subject)
     {
-        $this->adrDest = $adrDest;
+        $this->subject = $subject;
 
         return $this;
     }
 
     /**
-     * Get adrDest
+     * Get subject
      *
      * @return string
      */
-    public function getAdrDest()
+    public function getSubject()
     {
-        return $this->adrDest;
+        return $this->subject;
     }
 
     /**
-     * Set adrSrc
+     * Set mail
      *
-     * @param string $adrSrc
+     * @param string $mail
      *
      * @return message
      */
-    public function setAdrSrc($adrSrc)
+    public function setMail($mail)
     {
-        $this->adrSrc = $adrSrc;
+        $this->mail = $mail;
 
         return $this;
     }
 
     /**
-     * Get adrSrc
+     * Get mail
      *
      * @return string
      */
-    public function getAdrSrc()
+    public function getMail()
     {
-        return $this->adrSrc;
+        return $this->mail;
     }
 
     /**
-     * Set contenu
+     * Set object
      *
-     * @param string $contenu
+     * @param string $object
      *
      * @return message
      */
-    public function setContenu($contenu)
+    public function setObject($object)
     {
-        $this->contenu = $contenu;
+        $this->object = $object;
 
         return $this;
     }
 
     /**
-     * Get contenu
+     * Get object
      *
      * @return string
      */
-    public function getContenu()
+    public function getObject()
     {
-        return $this->contenu;
+        return $this->object;
     }
 }
 

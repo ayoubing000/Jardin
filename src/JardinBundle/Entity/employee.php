@@ -156,4 +156,3 @@ class employee extends FosUser
         return $this->infSup;
     }
 }
-

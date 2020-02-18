@@ -1,0 +1,22 @@
+{% include 'base_user.html.twig' %}
+<div class="container">
+                {% set flashbag_notices = app.session.flashbag.get('notice') %}
+                {% if flashbag_notices is not empty %}
+                    <div id="messegeResult" class="messegeResult">
+                        {% for notice in flashbag_notices %}
+                            <p>{{  notice }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+<div class="col-md-12">
+    <div class="leave_reply">
+        <div class="contact_form_blue">
+                {{ form_start(f) }}
+            {{ form_widget(f) }}
+            {{ form_end(f) }}
+        </div>
+    </div>
+</div>
+</div>
+
+{% include 'footer_user.html.twig' %}

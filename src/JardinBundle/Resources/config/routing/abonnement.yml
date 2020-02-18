@@ -1,0 +1,24 @@
+abonnement_index:
+    path:     /
+    defaults: { _controller: "JardinBundle:abonnement:index" }
+    methods:  GET
+
+abonnement_show:
+    path:     /{id}/show
+    defaults: { _controller: "JardinBundle:abonnement:show" }
+    methods:  GET
+
+abonnement_new:
+    path:     /new
+    defaults: { _controller: "JardinBundle:abonnement:new" }
+    methods:  [GET, POST]
+
+abonnement_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "JardinBundle:abonnement:edit" }
+    methods:  [GET, POST]
+
+abonnement_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "JardinBundle:abonnement:delete" }
+    methods:  DELETE

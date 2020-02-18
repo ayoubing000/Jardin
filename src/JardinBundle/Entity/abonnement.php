@@ -2,6 +2,7 @@
 
 namespace JardinBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,27 +51,25 @@ class abonnement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="enfant", mappedBy="abonnement    ")
-     * @ORM\JoinColumn(name="matricul_enfant",referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="enfant" , mappedBy="abonnment")
+     * @ORM\JoinColumn(name="enf_id",referencedColumnName="id")
      */
 
-   private  $enfant;
+    private  $enfant;
 
-    /**
-     * @return mixed
-     */
-    public function getParents()
+    public function __construct()
     {
-        return $this->parents;
+        $this->enfant=new ArrayCollection();
+
     }
 
     /**
-     * @param mixed $parents
+     * @ORM\ManyToOne(targetEntity="facture" , inversedBy="abn")
+     * @ORM\JoinColumn(name="facture_id",referencedColumnName="id")
      */
-    public function setParents($parents)
-    {
-        $this->parents = $parents;
-    }
+
+    private  $factures;
+
 
     /**
      * Get id
@@ -177,5 +176,39 @@ class abonnement
     {
         return $this->description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEnfant()
+    {
+        return $this->enfant;
+    }
+
+    /**
+     * @param mixed $enfant
+     */
+    public function setEnfant($enfant)
+    {
+        $this->enfant = $enfant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFactures()
+    {
+        return $this->factures;
+    }
+
+    /**
+     * @param mixed $factures
+     */
+    public function setFactures($factures)
+    {
+        $this->factures = $factures;
+    }
+
+
 }
 
