@@ -8,3 +8,14 @@ services:
     redirect.after.login:
         class: JardinBundle\Redirection\AfterLoginRedirection
         arguments: ["@router"]
+    socialBarHelper:
+        class: JardinBundle\Helper\SocialBarHelper
+        tags:
+            - {name: 'templating.helper', alias: 'social-buttons'}
+        arguments: [ templating ]
+
+    twig.extension.acme_social_bar:
+        class: JardinBundle\Helper\AcmeTwigSocialBar
+        tags:
+            - { name: 'twig.extension' }
+        arguments: [ service_container ]

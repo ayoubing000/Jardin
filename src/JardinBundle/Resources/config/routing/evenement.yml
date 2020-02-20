@@ -16,6 +16,7 @@ update_evenement:
 details_evenement:
     path:     /detail/{id}
     defaults: { _controller: "JardinBundle:Evenement:detailsEvenement" }
+
 add_comment:
     path:     /add-comment/{id}
     defaults: { _controller: "JardinBundle:Commentaire:addComment" }

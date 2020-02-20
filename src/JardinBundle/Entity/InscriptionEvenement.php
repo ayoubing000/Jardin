@@ -3,6 +3,7 @@
 namespace JardinBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +21,7 @@ class InscriptionEvenement
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
 
 
     /**
@@ -40,6 +42,12 @@ class InscriptionEvenement
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="enfant",mappedBy="inscriptionEvenements")
+     *
+     */
+    private $enfants;
 
 
     /**
@@ -106,6 +114,26 @@ class InscriptionEvenement
         $this->user = $user;
     }
 
+    /**
+     * @return Collection|enfant[]
+     */
+    public function getEnfants()
+    {
+        return $this->enfants;
+    }
 
+    /**
+     * @param mixed $enfants
+     */
+    public function setEnfants($enfants)
+    {
+        $this->enfants = $enfants;
+    }
+
+
+    public function __construct()
+    {
+        $this->enfants = new ArrayCollection();
+    }
 }
 

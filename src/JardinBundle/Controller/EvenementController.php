@@ -5,36 +5,39 @@ namespace JardinBundle\Controller;
 
 
 use JardinBundle\Entity\Evenement;
+use JardinBundle\Entity\User;
 use JardinBundle\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class EvenementController extends Controller
 {
-    public function listEvenementAction(){
-        $list=$this->getDoctrine()->getRepository(Evenement::class)->findAll();
-        return $this->render('JardinBundle:dashboard/evenement:list.html.twig',array('events'=>$list));
+    public function listEvenementAction()
+    {
+        $list = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+        return $this->render('JardinBundle:dashboard/evenement:list.html.twig', array('events' => $list));
     }
 
-    public function addEvenementAction(Request $request){
-        $event =new Evenement();
-        $form=$this->createForm(EvenementType::class,$event);
+    public function addEvenementAction(Request $request)
+    {
+        $event = new Evenement();
+        $form = $this->createForm(EvenementType::class, $event);
+        $form = $form->handleRequest($request);
 
-        $form=$form->handleRequest($request);
-        if($form->isValid())
-        {
-            $em=$this->getDoctrine()->getManager();
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
 
             return $this->redirectToRoute('list_evenement');
         }
-        return $this->render('JardinBundle:dashboard/evenement:add.html.twig',array('form'=>$form->createView()));
-        }
+        return $this->render('JardinBundle:dashboard/evenement:add.html.twig', array('form' => $form->createView()));
+    }
+
     public function deleteEvenementAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $event=$em->getRepository(Evenement::class)->find($id);
+        $event = $em->getRepository(Evenement::class)->find($id);
 
         $em->remove($event);
         $em->flush();
@@ -43,13 +46,12 @@ class EvenementController extends Controller
     }
 
 
-    public function updateEvenementAction(Request $request,$id)
+    public function updateEvenementAction(Request $request, $id)
     {
-        $em=$this->getDoctrine()->getManager();
-        $event=$em->getRepository(Evenement::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Evenement::class)->find($id);
 
-        if($request->isMethod('POST'))
-        {
+        if ($request->isMethod('POST')) {
             $event->setTitre($request->get('titre'));
             $dateDebut = new \DateTime($request->get('dateDebut'));
             $dateFin = new \DateTime($request->get('dateFin'));
@@ -65,16 +67,25 @@ class EvenementController extends Controller
 
         }
 
-        return $this->render('JardinBundle:dashboard/evenement:update.html.twig',array('event'=>$event));
+        return $this->render('JardinBundle:dashboard/evenement:update.html.twig', array('event' => $event));
     }
-public function detailsEvenementAction($id){
-    $em = $this->getDoctrine()->getManager();
-    $event=$em->getRepository(Evenement::class)->find($id);
-    return $this->render('JardinBundle:dashboard/evenement:detailsEvenement.html.twig',array('event'=>$event));
-}
 
-public function afficherEvenementsAction(){
-    $list=$this->getDoctrine()->getRepository(Evenement::class)->findAll();
-    return $this->render('JardinBundle:Parent/Evenement:list.html.twig',array('events'=>$list));
-}
+    public function detailsEvenementAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Evenement::class)->find($id);
+        return $this->render('JardinBundle:dashboard/evenement:detailsEvenement.html.twig', array('event' => $event));
+    }
+
+
+    public function listEvenementParentAction()
+    {
+        $events = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+        $username =(string) $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $currentUser = $em->getRepository(User::class)->findOneBy(array('username'=>$username));
+        return $this->render("JardinBundle:Parent/Evenement:list_evenement.html.twig", array("events"=>$events, "user"=>$currentUser));
+    }
+
+
 }

@@ -3,6 +3,7 @@
 namespace JardinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -41,11 +42,12 @@ class Evenement
     private $titre;
 
     /**
-     * @var string
+     * @ORM\Column(type="string",nullable=true)
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/*" })
      */
     private $image;
+
 
     /**
      * @var \DateTime
@@ -155,7 +157,7 @@ class Evenement
     }
 
     /**
-     * @param string $image
+     * @param mixed $image
      */
     public function setImage($image)
     {

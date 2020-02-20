@@ -28,6 +28,43 @@ class User extends FosUser
      */
     private $inscriptionEvenements;
 
+    /**
+     * @ORM\OneToMany(targetEntity="enfant", mappedBy="parent")
+     */
+    private $enfants;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEnfants()
+    {
+        return $this->enfants;
+    }
+
+    /**
+     * @param ArrayCollection $enfants
+     */
+    public function setEnfants($enfants)
+    {
+        $this->enfants = $enfants;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInscriptionEvenements()
+    {
+        return $this->inscriptionEvenements;
+    }
+
+    /**
+     * @param mixed $inscriptionEvenements
+     */
+    public function setInscriptionEvenements($inscriptionEvenements)
+    {
+        $this->inscriptionEvenements = $inscriptionEvenements;
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -38,7 +75,7 @@ class User extends FosUser
      * Sets the email.
      *
      * @param string $email
-     * @return User
+     * @return FosUser|\FOS\UserBundle\Model\UserInterface|User
      */
     public function setEmail($email)
     {
@@ -51,7 +88,7 @@ class User extends FosUser
      * Set the canonical email.
      *
      * @param string $emailCanonical
-     * @return User
+     * @return FosUser|\FOS\UserBundle\Model\UserInterface|User
      */
     public function setEmailCanonical($emailCanonical)
     {

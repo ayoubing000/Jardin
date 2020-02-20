@@ -1,10 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Parent Home
-</body>
-</html>
+{%  extends 'User/layout-yk.html.twig' %}
+{% block headerMenu %}
+    {% include "User/header-menu.html.twig" %}
+{% endblock headerMenu %}
+
+{% block body %}
+
+
+        <div id="breadcrumbs" class="section-block-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb">
+                            <li><a href="index.html">Home</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="evenements">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                    </div>
+                </div>
+
+                <div class="double_grids mb_50">
+                    <div class="row">
+
+
+                        <div class="col-md-6 wow fadeInUp">
+                            <div class="grids_block">
+                                <div class="grids_block_top">
+                                    <img src="img/events/events_2.jpg" alt="">
+                                </div>
+                                <div class="grids_block_center">
+                                    <div class="date_events_left b_red">
+                                        <div class="date_middle">
+                                            <p class="pb_10"><span>14</span></p>
+                                            <p>oct 2017</p>
+                                        </div>
+                                    </div>
+                                    <div class="date_events_right b_red_dark">
+                                        <p class="block_time pb_10"><i class="fa fa-clock-o"><span></span></i>8:00 am - 5:00 pm</p>
+                                        <p class="block_time normal"><i class="fa fa-map-marker"><span></span></i>121 King St, Melbourne VIC 3000, Tampa, FR 954816</p>
+                                    </div>
+                                </div>
+                                <div class="grids_brief">
+                                    <h4 class="grids_title t_red"><a href="event.html">Preparing for the New Year holiday</a></h4>
+                                    <p class="grids_description t_grey">Kindergarten and elementary school ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt teachers prepare younger students for future schooling by teaching them basic subjects such as math and reading.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-6 wow fadeInUp">
+                            <div class="grids_block">
+                                <div class="grids_block_top">
+                                    <img src="img/events/events_3.jpg" alt="">
+                                </div>
+                                <div class="grids_block_center">
+                                    <div class="date_events_left b_blue_light">
+                                        <div class="date_middle">
+                                            <p class="pb_10"><span>21</span></p>
+                                            <p>oct 2017</p>
+                                        </div>
+                                    </div>
+                                    <div class="date_events_right b_blue">
+                                        <p class="block_time pb_10"><i class="fa fa-clock-o"><span></span></i>10:00 am</p>
+                                        <p class="block_time normal"><i class="fa fa-map-marker"><span></span></i>121 King St, Melbourne VIC 3000, Tampa, FR 954816</p>
+                                    </div>
+                                </div>
+                                <div class="grids_brief">
+                                    <h4 class="grids_title t_blue"><a href="event.html">International Watermelon Day</a></h4>
+                                    <p class="grids_description t_grey">Kindergarten and elementary school ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt teachers prepare younger students for future schooling by teaching them basic subjects such as math and reading.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+{% endblock %}

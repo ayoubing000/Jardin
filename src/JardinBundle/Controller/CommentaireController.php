@@ -15,7 +15,6 @@ class CommentaireController extends Controller
 public function addCommentAction(Request $request, $id){
 
     $username =(string) $this->getUser();
-
     $em=$this->getDoctrine()->getManager();
     $currentUser = $em->getRepository(User::class)->findOneBy(array('username'=>$username));
 

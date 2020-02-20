@@ -2,6 +2,7 @@
 
 namespace JardinBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +63,27 @@ class enfant
      */
 
     private  $abonnment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User" )
+     * @ORM\JoinColumn(name="id_parent",referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="InscriptionEvenement",inversedBy="enfants")
+     */
+    private $inscriptionEvenements;
+
+    /**
+     * enfant constructor.
+     */
+    public function __construct()
+    {
+        $this->inscriptionEvenements = new ArrayCollection();
+    }
+
+
     /**
      * @return mixed
      */
@@ -207,5 +229,39 @@ class enfant
     {
         return $this->age;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParents($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return Collection|InscriptionEvenement[]
+     */
+    public function getInscriptionEvenements()
+    {
+        return $this->inscriptionEvenements;
+    }
+
+    /**
+     * @param mixed $inscriptionEvenements
+     */
+    public function setInscriptionEvenements($inscriptionEvenements)
+    {
+        $this->inscriptionEvenements = $inscriptionEvenements;
+    }
+
+
 }
 

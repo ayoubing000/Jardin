@@ -13,9 +13,21 @@ dashboard_home:
 enseignant_home:
     path:       /enseignant-home
     defaults: {_controller: JardinBundle:Main:enseignantHome}
-evenement_feature:
+
+evenement_dashboard:
     resource: "@JardinBundle/Resources/config/routing/evenement.yml"
     prefix:   /dashboard/events
 
+parent_evenements:
+    path:       /parent/evenements
+    defaults: {_controller: JardinBundle:Evenement:listEvenementParent}
+
+inscription_evenements:
+    path:       /parent/inscription/{idEvenement}
+    defaults: {_controller: JardinBundle:InscriptionEvenement:inscrireEvenement}
+
+desinscription_evenements:
+    path:       /parent/deinscription/{idEvenement}
+    defaults: {_controller: JardinBundle:InscriptionEvenement:annulerInscription}
 
 
