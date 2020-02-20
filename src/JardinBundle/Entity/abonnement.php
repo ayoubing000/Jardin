@@ -50,27 +50,62 @@ class abonnement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="enfant")
-     * @ORM\JoinColumn(name="matricul_enfant",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="enfant" , inversedBy="abonnment")
+     * @ORM\JoinColumn(name="enf_id",referencedColumnName="id")
      */
 
-   private  $enfant;
+    private  $enfant;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="facture" , inversedBy="abn")
+     * @ORM\JoinColumn(name="facture_id",referencedColumnName="id")
+     */
+
+    private  $factures;
+
 
     /**
      * @return mixed
      */
-    public function getParents()
+    public function getEnfant()
     {
-        return $this->parents;
+        return $this->enfant;
     }
+
+    /**
+     * @param mixed $enfant
+     */
+    public function setEnfant($enfant)
+    {
+        $this->enfant = $enfant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFactures()
+    {
+        return $this->factures;
+    }
+
+    /**
+     * @param mixed $factures
+     */
+    public function setFactures($factures)
+    {
+        $this->factures = $factures;
+    }
+
+    /**
+     * @return mixed
+     */
+
 
     /**
      * @param mixed $parents
      */
-    public function setParents($parents)
-    {
-        $this->parents = $parents;
-    }
+
 
     /**
      * Get id

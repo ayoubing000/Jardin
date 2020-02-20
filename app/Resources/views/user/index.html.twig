@@ -1,0 +1,53 @@
+
+{% block body %}
+    <div class="content-page">
+        <div class="content" style="background: white">
+    <h1>Users list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                <th>Image</th>
+                <th>Adresse</th>
+                <th>Numtel</th>
+                <th>Datenaissance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('User_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.age }}</td>
+                <td>{{ user.image }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.numTel }}</td>
+                <td>{% if user.dateNaissance %}{{ user.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+
+                            <a class="btn btn-secondary" href="{{ path('User_show', { 'id': user.id }) }}">show</a>
+
+                            <a class="btn btn-purple" href="{{ path('User_edit', { 'id': user.id }) }}">edit</a>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+
+            <a class="btn btn-primary" href="{{ path('User_new') }}">Create a new user</a>
+
+    </ul>
+        </div>
+    </div>
+{% endblock %}

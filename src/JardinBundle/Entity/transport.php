@@ -2,6 +2,9 @@
 
 namespace JardinBundle\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,11 +25,122 @@ class transport
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="date_debut", type="datetime" , nullable= true)
+     */
+
+        private $dateDebut;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="date_fin", type="datetime" , nullable=true )
+     */
+    private $dateFin;
+
+    /**
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param string $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * @param DateTime $dateDebut
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * @param DateTime $dateFin
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEnfants(): ArrayCollection
+    {
+        return $this->enfants;
+    }
+
+    /**
+     * @param ArrayCollection $enfants
+     */
+    public function setEnfants(ArrayCollection $enfants)
+    {
+        $this->enfants = $enfants;
+    }
+    /**
      * @var int
      *
      * @ORM\Column(name="nbr_bus", type="integer")
      */
     private $nbrBus;
+
+    /**
+     * @ORM\OneToMany(targetEntity="employee", mappedBy="transport")
+     * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
+     */
+    private $employee;
+    /**
+     * @ORM\OneToMany(targetEntity="enfant", mappedBy="transport")
+     * @ORM\JoinColumn(name="enfant_id", referencedColumnName="id")
+     */
+    private $enfants;
+
+    public function __construct() {
+        $this->employee = new ArrayCollection();
+        $this->enfants = new ArrayCollection();
+
+    }
+
+
+    /**
+     * @param mixed $employee
+     */
+    public function setEmployee($employee)
+    {
+        $this->employee = $employee;
+    }
 
     /**
      * @var int

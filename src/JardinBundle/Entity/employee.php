@@ -36,6 +36,29 @@ class employee extends FosUser
     private $diplomes;
 
     /**
+     * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\transport", inversedBy="employees")
+     * @ORM\JoinColumn(name="transport_id",referencedColumnName="id")
+     */
+    private $Transport;
+
+    /**
+     * @return mixed
+     */
+    public function getTransport()
+    {
+        return $this->Transport;
+    }
+
+    /**
+     * @param mixed $Transport
+     */
+    public function setTransport($Transport)
+    {
+        $this->Transport = $Transport;
+    }
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="cv", type="string", length=255)

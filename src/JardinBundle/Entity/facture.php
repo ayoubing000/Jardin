@@ -21,12 +21,6 @@ class facture
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ref_ab", type="integer")
-     */
-    private $refAb;
 
     /**
      * @var \DateTime
@@ -37,9 +31,26 @@ class facture
 
     /**
      * @ORM\ManyToOne(targetEntity="abonnement" , inversedBy="factures")
-     * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="abn_id",referencedColumnName="id")
      */
-    private $parent;
+
+    private $abn;
+
+    /**
+     * @return mixed
+     */
+    public function getAbn()
+    {
+        return $this->abn;
+    }
+
+    /**
+     * @param mixed $abn
+     */
+    public function setAbn($abn)
+    {
+        $this->abn = $abn;
+    }
     /**
      * @var \DateTime
      *

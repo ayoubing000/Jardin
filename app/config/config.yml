@@ -101,4 +101,4 @@ fos_user:
   registration:
     confirmation:
       template:   '@FOSUser/Registration/email.txt.twig'
-      enabled: true
+      enabled: false

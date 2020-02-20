@@ -14,7 +14,18 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('JardinBundle:dashboard:index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/Calendar", name="calendar")
+     */
+    public function CalendarAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('JardinBundle:calendar/fullcalendar:calendar.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }

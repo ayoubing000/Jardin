@@ -28,7 +28,7 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
     }
 
     /**
-     * @param Resquest $request
+     * @param Request $request
      * @param TokenInterface $token
      * @return RedirectResponse
      */

@@ -57,25 +57,71 @@ class enfant
     private $age;
 
     /**
-     * @ORM\ManyToOne(targetEntity="abonnemant")
-     * @ORM\JoinColumn(name="matricul_abn",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="abonnement", inversedBy="enfant")
+     * @ORM\JoinColumn(name="matricul_abn", referencedColumnName="id")
      */
 
     private  $abonnment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="enfants")
+     * @ORM\JoinColumn(name="matricul_prt", referencedColumnName="id")
+     */
+
+    private  $parents;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\transport", inversedBy="enfants")
+     * @ORM\JoinColumn(name="transport_id",referencedColumnName="id")
+     */
+    private $Transport;
+
     /**
      * @return mixed
      */
-    public function getAbonnments()
+    public function getAbonnment()
     {
         return $this->abonnment;
     }
 
     /**
-     * @param mixed $abonnments
+     * @return mixed
      */
-    public function setAbonnments($abonnments)
+    public function getTransport()
     {
-        $this->abonnments = $abonnments;
+        return $this->Transport;
+    }
+
+    /**
+     * @param mixed $Transport
+     */
+    public function setTransport($Transport)
+    {
+        $this->Transport = $Transport;
+    }
+
+    /**
+     * @param mixed $abonnment
+     */
+    public function setAbonnment($abonnment)
+    {
+        $this->abonnment = $abonnment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParents()
+    {
+        return $this->parents;
+    }
+
+    /**
+     * @param mixed $parents
+     */
+    public function setParents($parents)
+    {
+        $this->parents = $parents;
     }
 
     /**

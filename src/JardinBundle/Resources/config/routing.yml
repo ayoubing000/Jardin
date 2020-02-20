@@ -1,11 +1,30 @@
 jardin_homepage:
     path:     /
-    defaults: { _controller: JardinBundle:Default:index }
+    defaults: { _controller: JardinBundle:Main:userHome}
 
 user_home:
     path:       /user-home
     defaults:   {_controller: JardinBundle:Main:userHome }
+admin_home:
+    path:       /admin-home
+    defaults:   {_controller: JardinBundle:Main:adminHome }
 
 events_feature:
     resource: "@JardinBundle/Resources/config/routing/events.yml"
-    prefix:   /dashboard/events
+    prefix:   /user_home
+
+jardin_user:
+    resource: "@JardinBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+jardin_transport:
+    resource: "@JardinBundle/Resources/config/routing/transport.yml"
+    prefix:   /transport
+
+jardin_employee:
+    resource: "@JardinBundle/Resources/config/routing/employee.yml"
+    prefix:   /employee
+
+ancarebeca_full_calendar_load:
+    path:     /full-calendar/load
+    defaults: { _controller: JardinBundle:Calendar:load }

@@ -12,6 +12,12 @@ fos_user:
 reset:
   resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 
+ancarebeca_full_calendar_load:
+  resource: "@FullCalendarBundle/Resources/config/routing.yml"
+
 fos_user_profile:
   resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-  prefix: /personnel/profile
+  prefix: /profile
+
+fos_js_routing:
+  resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -1,0 +1,53 @@
+{% extends "::base_admin.html.twig" %}
+{% block body %}
+<div class="content-page">
+    <div class="content" style="background: white">
+     <h1 class="header-title">Transports list <span style="float: right" ><a  class=" btn btn-success "  href="{{ path('transport_new') }}">Creer nouveau transport</a></span></h1>
+
+
+
+
+
+
+
+
+    <table class="table table-active" style="margin-top: 30px">
+        <thead>
+            <tr>
+                <th style="text-align: center">Id</th>
+                <th style="text-align: center">Nbrbus</th>
+                <th style="text-align: center">Nbrenfant</th>
+                <th style="text-align: center">Destination</th>
+                <th style="text-align: center">Date Debut</th>
+                <th style="text-align: center">Date Fin</th>
+                <th style="text-align: center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transport in transports %}
+            <tr>
+                <td style="text-align: center"><a href="{{ path('transport_show', { 'id': transport.id }) }}">{{ transport.id }}</a></td>
+                <td style="text-align: center">{{ transport.nbrBus }}</td>
+                <td style="text-align: center">{{ transport.nbrEnfant }}</td>
+                <td style="text-align: center">{{ transport.destination }}</td>
+                <td style="text-align: center">{{ transport.dateDebut.date | date('h:m || d/m/y')}}</td>
+                <td style="text-align: center">{{ transport.dateFin.date | date('h:m || d/m/y')}}</td>
+
+                <td>
+                    <ul style="text-align: center">
+
+                            <a class="btn btn-primary" href="{{ path('transport_show', { 'id': transport.id }) }}">show</a>
+
+                            <a class="btn btn-success" href="{{ path('transport_edit', { 'id': transport.id }) }}">edit</a>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    </div>
+</div>
+{% endblock %}
