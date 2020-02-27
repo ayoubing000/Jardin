@@ -10,4 +10,14 @@ namespace JardinBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEnfants($id)
+    {
+        $query  =  $this->getEntityManager()->createQuery(
+            "select e.id ,e.nom , w.statu , w.description , w.type , w.statu_paiment from JardinBundle:enfant as e
+            INNER JOIN JardinBundle:abonnement as w
+            WHERE (e.parents = :id) and (e.id = w.enfant)"
+        ) ->setParameter('id',$id );
+        return $query->getResult();
+
+    }
 }

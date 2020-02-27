@@ -18,9 +18,9 @@ class messageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('subject')
-            ->add('mail')
-            ->add('object')
-        ->add('send',SubmitType::class);
+            ->add('mail',EmailType::class)
+            ->add('object',TextareaType::class)
+            ->add('send',SubmitType::class);
     }/**
      * {@inheritdoc}
      */

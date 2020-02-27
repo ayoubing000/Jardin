@@ -25,14 +25,14 @@ class abonnement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_debut", type="date")
+     * @ORM\Column(name="data_debut", type="date",nullable=true)
      */
     private $dataDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fin", type="date")
+     * @ORM\Column(name="date_fin", type="date",nullable=true)
      */
     private $dateFin;
 
@@ -51,6 +51,20 @@ class abonnement
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="statu", type="string", length=255)
+     */
+    private $statu = "no valide";
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statu_paiment", type="string", length=255)
+     */
+    private $statu_paiment ="en attente";
+
+    /**
      * @ORM\OneToOne(targetEntity="enfant" , mappedBy="abonnment")
      * @ORM\JoinColumn(name="enf_id",referencedColumnName="id")
      */
@@ -59,16 +73,40 @@ class abonnement
 
     public function __construct()
     {
-        $this->enfant=new ArrayCollection();
 
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="facture" , inversedBy="abn")
-     * @ORM\JoinColumn(name="facture_id",referencedColumnName="id")
+     * @return string
      */
+    public function getStatu()
+    {
+        return $this->statu;
+    }
 
-    private  $factures;
+    /**
+     * @param string $statu
+     */
+    public function setStatu($statu)
+    {
+        $this->statu = $statu;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatuPaiment()
+    {
+        return $this->statu_paiment;
+    }
+
+    /**
+     * @param string $statu_paiment
+     */
+    public function setStatuPaiment($statu_paiment)
+    {
+        $this->statu_paiment = $statu_paiment;
+    }
 
 
     /**
@@ -193,21 +231,6 @@ class abonnement
         $this->enfant = $enfant;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFactures()
-    {
-        return $this->factures;
-    }
-
-    /**
-     * @param mixed $factures
-     */
-    public function setFactures($factures)
-    {
-        $this->factures = $factures;
-    }
 
 
 }

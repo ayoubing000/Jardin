@@ -8,23 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>{% block title %}L'ABC{% endblock %}</title>
     {% block stylesheets %}
-        <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
-        <!-- App css -->
-        <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css"
-              id="bootstrap-stylesheet"/>
+        <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>
         <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet"/>
-
     {% endblock %}
+
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
 {% block header %}
     <div class="navbar-custom">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-
-
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                    aria-haspopup="false" aria-expanded="false">
@@ -32,8 +27,6 @@
                     <span class="badge badge-danger rounded-circle noti-icon-badge">4</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="">
-
-                    <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="font-16 m-0">
                                     <span class="float-right">
@@ -43,11 +36,9 @@
                                     </span>Notification
                         </h5>
                     </div>
-
                     <div class="slimScrollDiv"
                          style="position: relative; overflow: hidden; width: auto; height: 425px;">
                         <div class="slimscroll noti-scroll" style="overflow: hidden; width: auto; height: 425px;">
-
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="notify-icon bg-success"><i class="mdi mdi-comment-account-outline"></i>
@@ -56,7 +47,6 @@
                                     <small class="text-muted">1 min ago</small>
                                 </p>
                             </a>
-
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
@@ -64,7 +54,6 @@
                                     <small class="text-muted">5 hours ago</small>
                                 </p>
                             </a>
-
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="notify-icon bg-danger"><i class="mdi mdi-heart"></i></div>
@@ -72,7 +61,6 @@
                                     <small class="text-muted">3 days ago</small>
                                 </p>
                             </a>
-
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="notify-icon bg-warning"><i class="mdi mdi-comment-account-outline"></i>
@@ -153,8 +141,6 @@
                 </div>
             </li>
         </ul>
-
-        <!-- LOGO -->
         <div class="logo-box">
             <a href="index.html" class="logo text-center logo-dark">
                         <span class="logo-lg">
@@ -166,7 +152,6 @@
                             <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                         </span>
             </a>
-
             <a href="index.html" class="logo text-center logo-light">
                         <span class="logo-lg">
                             <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="26">
@@ -178,7 +163,6 @@
                         </span>
             </a>
         </div>
-
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
             <li>
                 <button class="button-menu-mobile">
@@ -188,24 +172,16 @@
         </ul>
     </div>
     {% include 'navbar_admin.html.twig' %}
-
 {% endblock %}
-<div class="content-page">
-    <div class="content">
-        <div class="container-fluid">
             {% block body %}
+
             {% endblock %}
-        </div>
-    </div>
-</div>
-{% block javascripts %}
-    <!-- Vendor js -->
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
-    <!-- App js -->
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
-{% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
+        <script src="{{ asset('assets/js/app.min.js') }}"></script>
+    {% endblock %}
 </body>
 </html>

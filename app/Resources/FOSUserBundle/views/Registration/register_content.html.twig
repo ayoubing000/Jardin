@@ -1,27 +1,28 @@
-{%  include('base_user.html.twig')%}
+{%  extends(':User:layout-yk.html.twig')%}
 {% trans_default_domain 'FOSUserBundle' %}
-    {% block stylesheets %}
-    {% endblock %}
+{% block headerMenu %}
+    {% include ":User:base_parent_header.html.twig" %}
+{% endblock headerMenu %}
+{% block body %}
     <div id="breadcrumbs" class="section-block-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ path('jardin_homepage') }}">Home</a></li>
                         <li class="active">Register</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-
     <section id="authorization_page" class="authorization_page">
         <div class="container">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10 dot">
                     <h2 class="section-title">Register</h2>
-                    <p class="section-description">Already have an account? - <a href="login.html">Log In</a></p>
+                    <p class="section-description">Already have an account? - <a href="{{ path('fos_user_security_login') }}">Log In</a></p>
                 </div>
                 <div class="col-md-1"></div>
             </div>
@@ -43,5 +44,4 @@
             </div>
         </div>
     </section>
-
-{%  include('footer_user.html.twig')%}
+{% endblock %}

@@ -39,6 +39,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:  ['bootstrap_4_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -102,3 +103,12 @@ fos_user:
     confirmation:
       template:   '@FOSUser/Registration/email.txt.twig'
       enabled: true
+knp_snappy:
+  pdf:
+    enabled: true
+    binary: "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+    options:
+      - { name: 'page-size', value: 'A4' }
+vresh_twilio:
+    sid: 'ACadb91706b63c9681875d8c4419471e8d'
+    authToken: 'e5d75d486eb118880f9b0d5c57c02919'

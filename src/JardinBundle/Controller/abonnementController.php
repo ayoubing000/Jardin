@@ -4,7 +4,6 @@ namespace JardinBundle\Controller;
 
 use JardinBundle\Entity\abonnement;
 use JardinBundle\Entity\Abonnmentad;
-use JardinBundle\Form\abonnementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,126 +11,130 @@ use Symfony\Component\HttpFoundation\Response;
 
 class abonnementController extends Controller
 {
-
-    public function indexAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $abonnements = $em->getRepository('JardinBundle:abonnement')->findAll();
-        return $this->render('JardinBundle:Parent:Abonnement.html.twig', array(
+        $abonnements = $em->getRepository('JardinBundle:Abonnmentad')->findAll();
+        return $this->render('JardinBundle:Parent/Abonnement:Abonnement.html.twig', array(
             'abonnements' => $abonnements,
         ));
     }
-    /*Purchase Abonment*/
+    /*Confirmation de achat */
     public function abnselectionerAction($id)
+    {
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->container->get('security.token_storage')->getToken()->getUser()->getid();
+            $ko = $em->getRepository(Abonnmentad::class)->find($id);
+            $enf = $em->getRepository('JardinBundle:enfant')->getenfantparent($user);
+            return $this->render('JardinBundle:Parent/Abonnement:purchase.html.twig', array(
+                'ko' => $ko,
+                'enf' => $enf
+            ));
+        }
+        else
+            return $this->redirectToRoute('fos_user_security_login');
+
+    }
+
+
+//affecter un abonnement a un enfant avec test sur
+
+    public function registerabnAction(Request $request)
+    {
+        $now = new \DateTime();
+        $em = $this->getDoctrine()->getManager();
+        $id = $request->get('enfant');
+        $cc = $em->getRepository('JardinBundle:abonnement')->getabnenf($id);
+        if( $cc[0]->getStatu() == 'valide')
+        {
+            $em = $this->getDoctrine()->getManager();
+            $abonnements = $em->getRepository('JardinBundle:Abonnmentad')->findAll();
+            $this->get('session')->getFlashBag()->add('error','Vous avez déja un abonnment');
+            return $this->render('JardinBundle:Parent/Abonnement:Abonnement.html.twig', array(
+                'abonnements' => $abonnements,
+            ));
+
+        }elseif($cc[0]->getDateFin() < $now && $cc[0]->getStatu() == 'no valide')
+        {
+            if ($request->isMethod('POST')) {
+                $id = $request->get('enfant');
+                $enafant = $em->getRepository('JardinBundle:enfant')->find($id);
+                $abn = $em->getRepository('JardinBundle:abonnement')->findBy(array("enfant"=>$id));
+                $abn[0]->setType($request->get('type'));
+                $abn[0]->setDescription($request->get('description'));
+                $abn[0]->setDataDebut(null);
+                $abn[0]->setDateFin(null);
+                $abn[0]->setStatuPaiment("en attente");
+                $abn[0]->setStatu("no valide");
+                $em->persist($abn[0]);
+                $em->flush();
+                return $this->render('JardinBundle:Parent/Abonnement:Success.html.twig',
+                    array('type'=> $request->get('type')
+                    ,'enfant'=>$enafant)
+                );
+            }
+
+        }elseif ($cc[0]->getStatu() == 'no valide')
+        {
+            $em = $this->getDoctrine()->getManager();
+            $abonnements = $em->getRepository('JardinBundle:Abonnmentad')->findAll();
+            $this->get('session')->getFlashBag()->add('warning','vous devez payer votre abonnement');
+            return $this->render('JardinBundle:Parent/Abonnement:Abonnement.html.twig', array(
+                'abonnements' => $abonnements,
+            ));
+        }elseif ($cc[0]->getDateFin() < $now)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $abonnements = $em->getRepository('JardinBundle:Abonnmentad')->findAll();
+            $this->get('session')->getFlashBag()->add('other','Votre Abonnement est expiré');
+            return $this->render('JardinBundle:Parent/Abonnement:Abonnement.html.twig', array(
+                'abonnements' => $abonnements,
+            ));
+        }
+        else {
+            if ($request->isMethod('POST')) {
+                $abonnement = new abonnement();
+                $enafant = $em->getRepository('JardinBundle:enfant')->find($id);
+                $abonnement->setType($request->get('type'));
+                $abonnement->setDescription($request->get('description'));
+                $abonnement->setEnfant($enafant);
+                $em->persist($abonnement);
+                $em->flush();
+                return $this->render('JardinBundle:Parent/Abonnement:Success.html.twig',
+                    array('type' => $request->get('type')
+                    , 'enfant' => $enafant)
+                );
+            }
+        }
+
+    }
+    public function affichenfantabnAction()
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.token_storage')->getToken()->getUser()->getid();
-        $ko = $em->getRepository(Abonnmentad::class)->find($id);
-        $enf = $em->getRepository('JardinBundle:enfant')->getenfantparent($user) ;
-        return $this->render('JardinBundle:Parent:purchase.html.twig', array(
-            'ko' =>$ko,
-            'enf'=>$enf
-        ));
+        $enafant = $em->getRepository('JardinBundle:User')->getEnfants($user);
+        return $this->render("@Jardin/Parent/Abonnement/affiche_abn.html.twig",array('tab'=>$enafant));
     }
-
-    public function newAction(Request $request)
-    {
-        $abonnement = new Abonnement();
-        $submittedToken = $request->request->get('token');
-
-        $form = $this->createForm('JardinBundle\Form\abonnementType', $abonnement);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('add-item', $submittedToken)) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($abonnement);
-            $em->flush();
-            return $this->redirectToRoute('abonnement_show', array('id' => $abonnement->getId()));
-        }
-
-        return $this->render('abonnement/new.html.twig', array(
-            'abonnement' => $abonnement,
-            'form' => $form->createView(),
-        ));
-    }
-
-    public function showAction(Request $request)
+    public function affiche_parent_abnAction()
     {
         $em = $this->getDoctrine()->getManager();
-        //$deleteForm = $this->createDeleteForm($abonnement);
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $getidabn = $em->getRepository('JardinBundle:Abonnmentad')->findBy(array('id'=>$request->get('id'))) ;
-        $nbrenf = $em->getRepository('JardinBundle:enfant')->SumEnfant($user->getId());
-        return $this->render('JardinBundle:Parent:index.html.twig', array(
-            'nbrenf' => $nbrenf,'getidabn'=>$getidabn
-        ));
+        $user = $this->container->get('security.token_storage')->getToken()->getUser()->getid();
+
     }
-    public function registerabnAction(Request $request)
+
+
+
+
+    public function showadminabonnmentAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $time = new \DateTime();
-        $next = new \DateTime();
-        $abonnement = new abonnement();
-        if ($request->isMethod('POST')) {
-            $abonnement->setEnfant($request->get('enfant'));
-            $abonnement->setDataDebut($time);
-            $abonnement->setDateFin($next->modify("+1 months"));
-            $abonnement->setType($request->get('type'));
-            $abonnement->setDescription($request->get('description'));
-            $em->persist($abonnement);
-            $em->flush();
-            return new Response('sucess');
-        }
-
-    }
-
-    public function editAction(Request $request, abonnement $abonnement)
-    {
-        $deleteForm = $this->createDeleteForm($abonnement);
-        $editForm = $this->createForm('JardinBundle\Form\abonnementType', $abonnement);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('abonnement_edit', array('id' => $abonnement->getId()));
-        }
-
-        return $this->render('abonnement/edit.html.twig', array(
-            'abonnement' => $abonnement,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        $data = $em->getRepository('JardinBundle:abonnement')->getdata();
+        return $this->render('@Jardin/dashboard/abonnement/abonnement.html.twig',array(
+            'data'=>$data
         ));
     }
 
 
-    public function deleteAction(Request $request, abonnement $abonnement)
-    {
-        $form = $this->createDeleteForm($abonnement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($abonnement);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('abonnement_index');
-    }
-
-    /**
-     * Creates a form to delete a abonnement entity.
-     *
-     * @param abonnement $abonnement The abonnement entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(abonnement $abonnement)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('abonnement_delete', array('id' => $abonnement->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

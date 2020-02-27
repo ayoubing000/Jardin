@@ -3,7 +3,7 @@
 namespace JardinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Abonnmentad
  *
@@ -32,6 +32,7 @@ class Abonnmentad
      * @var string
      *
      * @ORM\Column(name="Prix", type="float")
+     *  @Assert\GreaterThan (value = 0)
      */
     private $prix;
 

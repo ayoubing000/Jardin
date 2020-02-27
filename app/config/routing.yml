@@ -12,14 +12,9 @@ fos_user:
 reset:
   resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 
-fos_user_profile:
-  resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-  prefix: /personnel/profile
-
 add_enseignant_account:
   path: /dashboard/add-enseignant
   defaults: {_controller: JardinBundle:User:register}
-
 
 dashboard_home:
   path:       /dashboard

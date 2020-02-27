@@ -10,7 +10,7 @@ class MainController extends  Controller
 {
     public function parentHomeAction(){
         $username=(string) $this->getUser();
-        return $this->render('JardinBundle:Parent:index.html.twig',array('username'=> $username));
+        return $this->render('JardinBundle:Parent:Profil.html.twig',array('username'=> $username));
     }
 
     public function enseignantHomeAction(){
