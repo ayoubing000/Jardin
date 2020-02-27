@@ -112,7 +112,7 @@
                 <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
                    aria-haspopup="false" aria-expanded="false">
                         <span class="pro-user-name ml-1">
-                                    Maxine K  <i class="mdi mdi-chevron-down"></i>
+                                  {{ app.user.username }}  <i class="mdi mdi-chevron-down"></i>
                             </span>
                     <img src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="user-image"
                          class="rounded-circle">
@@ -191,21 +191,22 @@
 
 {% endblock %}
 <div class="content-page">
-    <div class="content">
+    <div class="content" style="background-color: white">
         <div class="container-fluid">
             {% block body %}
             {% endblock %}
         </div>
     </div>
 </div>
+
+<!-- Vendor js -->
+<script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+<script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
+<script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
+<!-- App js -->
+<script src="{{ asset('assets/js/app.min.js') }}"></script>
 {% block javascripts %}
-    <!-- Vendor js -->
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/morris-js/morris.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
-    <!-- App js -->
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
 {% endblock %}
 </body>
 </html>

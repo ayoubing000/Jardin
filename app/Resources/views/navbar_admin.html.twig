@@ -2,11 +2,18 @@
     <div class="left-side-menu">
         <div class="user-box">
             <div class="float-left">
-                <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle">
+                <img src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="" class="avatar-md rounded-circle">
             </div>
             <div class="user-info">
-                <a href="#">Ons</a>
-                <p class="text-muted m-0">Administrator</p>
+                <a href="#">{{ app.user.username }}</a>
+                <p class="text-muted m-0">
+                    {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        Super Administrateur
+                    {% else %}
+                        Administrateur
+                    {% endif %}
+
+                </p>
             </div>
         </div>
         <!--- Sidemenu -->

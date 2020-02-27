@@ -24,13 +24,15 @@ class EvenementType extends AbstractType
         $builder
 
             ->add('titre')
-            ->add('image', FileType::class,array('label'=>'Photo','required'=> false))
+            ->add('image', FileType::class, ['mapped' => false])
             ->add('dateDebut')
             ->add('dateFin')
             ->add('type')
             ->add('description')
             ->add('active')
+            ->add('nombreDePlace')
             ->add('Enregistrer',SubmitType::class);
+
     }
 
 

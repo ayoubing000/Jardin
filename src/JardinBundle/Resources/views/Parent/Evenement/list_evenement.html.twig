@@ -29,58 +29,77 @@
                 <div class="row">
 
                     {% for event in events %}
-                        <div class="col-md-6 wow fadeInUp" style="margin-bottom: 50px;">
-                            <div class="grids_block">
-                                <div class="grids_block_top">
-                                </div>
-                                <div class="grids_block_center">
-                                    <div class="date_events_left b_red">
-                                        <div class="date_middle">
-                                            {#  {{ event.dateDebut | date("m-d-Y  h:m") }}#}
-                                            <p class="pb_10"><span>{{ event.dateDebut | date("d") }}</span></p>
-                                            <p> {{ event.dateDebut | date("M Y") }}</p>
-                                        </div>
+                    {% set remainingPlacesCount = event.nombreDePlace - event.inscriptionEvenements|reduce((cary,inscri)=>cary+(inscri.enfants|length)) %}
+                    <div class="col-md-6 wow fadeInUp" style="margin-bottom: 50px;">
+                        <div class="grids_block" style="min-height:500px; height:500px">
+                            <div class="grids_block_top">
+                            </div>
+                            <div class="grids_block_center">
+                                <div class="date_events_left b_blue_light">
+                                    <div class="date_middle">
+                                        {#  {{ event.dateDebut | date("m-d-Y  h:m") }}#}
+                                        <p class="pb_10"><span>{{ event.dateDebut | date("d") }}</span></p>
+                                        <p> {{ event.dateDebut | date("M Y") }}</p>
                                     </div>
-                                    <div class="date_events_right b_red_dark">
-                                        <p class="block_time pb_10"><i class="fa fa-clock-o"><span></span></i>
-                                            du {{ event.dateDebut | date("m-d-Y  h:m") }}
-                                            au {{ event.dateFin | date("m-d-Y  h:m") }}
+                                </div>
+                                <div class="date_events_right b_blue_light">
+                                    <p class="block_time pb_10"><i class="fa fa-clock-o"><span></span></i>
+                                        du {{ event.dateDebut | date("m-d-Y  h:m") }}
+                                        au {{ event.dateFin | date("m-d-Y  h:m") }}
+                                    </p>
+                                    <p class="block_time normal"><i class="fa fa-map-marker"><span></span></i>
+                                        address</p>
+                                </div>
+                            </div>
+                            <div class="grids_brief">
+                                <h4 class="grids_title t_red">
+                                    <a href="event.html">{{ event.titre }}</a></h4>
+                                <p class="grids_description t_grey">{{ event.description }}</p>
+                                <hr>
+                                <p class="grids_description t_grey"> Nombre de places restantes:
+                                    {{ remainingPlacesCount }}
+                                </p>
+                                {% if user in event.inscriptionEvenements|map(inscri=>inscri.user) %}
+                                <br>
+                                <p class="grids_description t_grey"> Vos enfants inscrits: </p>
+
+                                {% for enfant in user.enfants %}
+                                    {% if event in enfant.inscriptionEvenements|map(inscri=>inscri.evenement) %}
+
+                                        <p class="grids_description t_grey">
+                                            - {{ enfant.prenom }} {{ enfant.nom }}
                                         </p>
-                                        <p class="block_time normal"><i class="fa fa-map-marker"><span></span></i>
-                                            address</p>
-                                    </div>
-                                </div>
-                                <div class="grids_brief">
-                                    <h4 class="grids_title t_red">
-                                        <a href="event.html">{{ event.titre }}</a></h4>
-                                    <p class="grids_description t_grey">{{ event.description }}</p>
-                                    <br>
-                                    <p>
-                                        {% if user in event.inscriptionEvenements|map(inscri=>inscri.user) %}
-                                    <br>
-                                    <p class="grids_description t_grey"> Vos enfants inscrits: </p>
-
-                                        {% for enfant in user.enfants %}
-                                            {% if event in enfant.inscriptionEvenements|map(inscri=>inscri.evenement) %}
-
-                                                <p class="grids_description t_grey"> - {{ enfant.prenom }} {{ enfant.nom }} </p>
-                                            {% endif %}
-                                        {% endfor %}
-
-
+                                    {% endif %}
+                                {% endfor %}
+                                <div style="display:flex">
                                     <a class="button b_green_green_light"
                                        style="color: white;background-color: orange; margin-top: 20px;"
                                        href="{{ path('desinscription_evenements',{'idEvenement':event.id}) }}">
                                         désinscription
                                     </a>
+
                                     {% else %}
-                                        <a class="button b_green_green_light register-form" style="color: white;margin-top: 20px;"
+                                    {% if remainingPlacesCount>0 %}
+                                    <div style="display:flex">
+                                        <a class="button b_green_green_light register-form"
+                                           style="color: white;margin-top: 20px;"
                                            href="#{{ event.id }}">
                                             inscription
                                         </a>
-                                    {% endif %}
+                                        {% else %}
+                                            <p style="color: orangered">Il n'y a pas de place disponible </p>
+                                        {% endif %}
 
-                                    </p>
+                                        {% endif %}
+
+                                        <a class="button b_green_green_light"
+                                           style="color: white; margin-top: 20px; background-color: #337ab7;"
+                                           href="{{ path('details_evenement_parent',{'id':event.id}) }}">
+                                            <i class="pr_10  fa fa-eye"></i>
+                                            Détails Evenement
+                                        </a>
+                                    </div>
+
                                     <br>
 
                                     {{ socialButtons( { 'facebook': {'locale':'fr_FR', 'send':true}} ) }}
@@ -124,9 +143,9 @@
                                                         {% for enfant in user.enfants %}
                                                             <div class="reg_checkbox" style="display: block">
                                                                 <input type="checkbox" class="checkbox"
-                                                                       id="{{ enfant.prenom }}"
+                                                                       id="{{ "#{enfant.prenom}_#{event.id}" }}"
                                                                        name=" {{ enfant.prenom }}"/>
-                                                                <label for="{{ enfant.prenom }}"></label>
+                                                                <label for="{{ "#{enfant.prenom}_#{event.id}" }}"></label>
                                                                 <span>{{ enfant.prenom }}</span>
                                                             </div>
                                                         {% endfor %}
@@ -149,10 +168,10 @@
                             </div>
                         </div>
 
-                    {% endfor %}
+                        {% endfor %}
 
+                    </div>
                 </div>
-
             </div>
     </section>
 

@@ -14,8 +14,9 @@ class EvenementController extends Controller
 {
     public function listEvenementAction()
     {
+        $username = (string)$this->getUser();
         $list = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
-        return $this->render('JardinBundle:dashboard/evenement:list.html.twig', array('events' => $list));
+        return $this->render('JardinBundle:dashboard/evenement:list.html.twig', array('events' => $list, 'username' => $username));
     }
 
     public function addEvenementAction(Request $request)
@@ -72,19 +73,28 @@ class EvenementController extends Controller
 
     public function detailsEvenementAction($id)
     {
+        $username = (string)$this->getUser();
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository(Evenement::class)->find($id);
-        return $this->render('JardinBundle:dashboard/evenement:detailsEvenement.html.twig', array('event' => $event));
+        return $this->render('JardinBundle:dashboard/evenement:detailsEvenement.html.twig', array('event' => $event,'username' => $username));
+    }
+
+    public function detailsEvenementParentAction($id)
+    {
+        $username = (string)$this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Evenement::class)->find($id);
+        return $this->render('JardinBundle:Parent/Evenement:details_evenement.html.twig', array('event' => $event,'username' => $username));
     }
 
 
     public function listEvenementParentAction()
     {
         $events = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
-        $username =(string) $this->getUser();
-        $em=$this->getDoctrine()->getManager();
-        $currentUser = $em->getRepository(User::class)->findOneBy(array('username'=>$username));
-        return $this->render("JardinBundle:Parent/Evenement:list_evenement.html.twig", array("events"=>$events, "user"=>$currentUser));
+        $username = (string)$this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $currentUser = $em->getRepository(User::class)->findOneBy(array('username' => $username));
+        return $this->render("JardinBundle:Parent/Evenement:list_evenement.html.twig", array("events" => $events, "user" => $currentUser));
     }
 
 

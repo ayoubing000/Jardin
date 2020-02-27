@@ -35,17 +35,16 @@ class UserDefaultRole implements EventSubscriberInterface
 
     public function onRegistrationSuccess(FormEvent $event)
     {
-        $logger = $this->logger;
-        /** @var $user \FOS\UserBundle\Model\UserInterface */
+        //$logger = $this->logger;
         $user = $event->getForm()->getData();
             if ((!$this->authorizationChecker->isGranted('ROLE_ADMIN')) and
                 !$this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN') ) {
 
-                $logger->info('old roles: : '.json_encode($user->getRoles()));
+                //$logger->info('old roles: : '.json_encode($user->getRoles()));
                 $roles = ['ROLE_PARENT'];
                 $user->setRoles($roles);
             }
-        $logger->info(json_encode($user->getRoles()));
+        //$logger->info(json_encode($user->getRoles()));
     }
 
 }

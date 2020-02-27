@@ -18,6 +18,8 @@ evenement_dashboard:
     resource: "@JardinBundle/Resources/config/routing/evenement.yml"
     prefix:   /dashboard/events
 
+
+# url parent
 parent_evenements:
     path:       /parent/evenements
     defaults: {_controller: JardinBundle:Evenement:listEvenementParent}
@@ -29,5 +31,18 @@ inscription_evenements:
 desinscription_evenements:
     path:       /parent/deinscription/{idEvenement}
     defaults: {_controller: JardinBundle:InscriptionEvenement:annulerInscription}
+
+details_evenement_parent:
+    path:     /parent/details-evenement/{id}
+    defaults: { _controller: "JardinBundle:Evenement:detailsEvenementParent" }
+
+parent_add_comment:
+    path:     /parent/add-comment/{id}
+    defaults: { _controller: "JardinBundle:Commentaire:addComment" }
+
+parent_delete_comment:
+    path:     /parent/delete-comment/{id}
+    defaults: { _controller: "JardinBundle:Commentaire:deleteComment" }
+
 
 

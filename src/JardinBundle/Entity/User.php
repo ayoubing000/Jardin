@@ -105,6 +105,16 @@ class User extends FosUser
         return $this->username;
     }
 
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+
+
 
 
 }

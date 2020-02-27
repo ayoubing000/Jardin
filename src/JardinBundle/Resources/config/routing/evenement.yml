@@ -13,6 +13,7 @@ delete_evenement:
 update_evenement:
     path:     /update/{id}
     defaults: { _controller: "JardinBundle:Evenement:updateEvenement" }
+
 details_evenement:
     path:     /detail/{id}
     defaults: { _controller: "JardinBundle:Evenement:detailsEvenement" }
@@ -24,3 +25,7 @@ add_comment:
 delete_comment:
     path:     /delete-comment/{id}
     defaults: { _controller: "JardinBundle:Commentaire:deleteComment" }
+
+update_comment:
+    path:     /update
+    defaults: { _controller: "JardinBundle:Commentaire:updateComment" }

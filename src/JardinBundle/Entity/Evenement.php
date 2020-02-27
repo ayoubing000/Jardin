@@ -53,6 +53,7 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="date_debut", type="date")
+     * @Assert\DateTime()
      */
     private $dateDebut;
 
@@ -60,6 +61,8 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="date_fin", type="date")
+     * @Assert\DateTime()
+     * @Assert\GreaterThan(propertyPath="dateDebut")
      */
     private $dateFin;
 
@@ -76,6 +79,13 @@ class Evenement
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombreDePlace", type="integer", nullable=false)
+     */
+    private $nombreDePlace;
 
     /**
      * @var boolean
@@ -242,6 +252,22 @@ class Evenement
     public function setActive($active)
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNombreDePlace()
+    {
+        return $this->nombreDePlace;
+    }
+
+    /**
+     * @param int $nombreDePlace
+     */
+    public function setNombreDePlace($nombreDePlace)
+    {
+        $this->nombreDePlace = $nombreDePlace;
     }
 
 }
