@@ -21,7 +21,7 @@ class CalendarController extends Controller
     {
         $startDate = new \DateTime($request->get('start'));
         $endDate = new \DateTime($request->get('end'));
-        $filters = $request->get('filters', []);
+        $filters = $request->get('filters', [get_current_user()]);
 
         try {
             $content = $this

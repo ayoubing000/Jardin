@@ -21,7 +21,7 @@ transport_edit:
 transport_delete:
     path:     /{id}/delete
     defaults: { _controller: "JardinBundle:transport:delete" }
-    methods:  DELETE
+
 admin_index:
     path:     /admin_home
     defaults: { _controller: "JardinBundle:Main:adminHome" }

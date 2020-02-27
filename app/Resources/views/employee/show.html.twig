@@ -1,28 +1,30 @@
-
+{% extends '::base_admin.html.twig' %}
 {% block body %}
-    <h1>Employee</h1>
+<div class="content-page">
+    <div class="content" style="background: white">
+    <h1>Chauffeur</h1>
 
-    <table>
-        <tbody>
+    <table class="table">
+        <tbody class="thead-dark">
             <tr>
                 <th>Id</th>
-                <td>{{ employee.id }}</td>
+                <td class="table-primary">{{ employee.id }}</td>
             </tr>
             <tr>
                 <th>Cin</th>
-                <td>{{ employee.cin }}</td>
+                <td class="table-primary">{{ employee.cin }}</td>
             </tr>
             <tr>
                 <th>Diplomes</th>
-                <td>{{ employee.diplomes }}</td>
+                <td class="table-primary">{{ employee.diplomes }}</td>
             </tr>
             <tr>
                 <th>Cv</th>
-                <td>{{ employee.cv }}</td>
+                <td class="table-primary">{{ employee.cv }}</td>
             </tr>
             <tr>
                 <th>Infsup</th>
-                <td>{{ employee.infSup }}</td>
+                <td class="table-primary">{{ employee.infSup }}</td>
             </tr>
         </tbody>
     </table>
@@ -40,4 +42,6 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+    </div>
+</div>
 {% endblock %}

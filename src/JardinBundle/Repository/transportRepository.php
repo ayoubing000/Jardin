@@ -10,4 +10,5 @@ namespace JardinBundle\Repository;
  */
 class transportRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

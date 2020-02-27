@@ -22,6 +22,7 @@ class DefaultController extends Controller
     /**
      * @Route("/Calendar", name="calendar")
      */
+
     public function CalendarAction(Request $request)
     {
         // replace this example code with whatever you need

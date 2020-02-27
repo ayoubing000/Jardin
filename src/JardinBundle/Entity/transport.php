@@ -3,8 +3,8 @@
 namespace JardinBundle\Entity;
 
 use DateTime;
+use  Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,15 +33,18 @@ class transport
 
     /**
      * @var DateTime
-     *
-     * @ORM\Column(name="date_debut", type="datetime" , nullable= true)
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @ORM\Column(name="date_debut", type="datetime")
      */
 
         private $dateDebut;
 
     /**
      * @var DateTime
-     *
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
      * @ORM\Column(name="date_fin", type="datetime" , nullable=true )
      */
     private $dateFin;
@@ -97,7 +100,7 @@ class transport
     /**
      * @return ArrayCollection
      */
-    public function getEnfants(): ArrayCollection
+    public function getEnfants()
     {
         return $this->enfants;
     }
@@ -112,27 +115,30 @@ class transport
     /**
      * @var int
      *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 30,
+     *      minMessage = "You must be at least {{ limit }}cm tall to enter",
+     *      maxMessage = "You cannot be taller than {{ limit }}cm to enter"
+     * )
      * @ORM\Column(name="nbr_bus", type="integer")
      */
     private $nbrBus;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="employee", mappedBy="transport")
-     * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\employee", inversedBy="transport")
+     * @ORM\JoinColumn(name="emplyee_id",referencedColumnName="id")
      */
     private $employee;
+
     /**
-     * @ORM\OneToMany(targetEntity="enfant", mappedBy="transport")
-     * @ORM\JoinColumn(name="enfant_id", referencedColumnName="id")
+     * @return mixed
      */
-    private $enfants;
-
-    public function __construct() {
-        $this->employee = new ArrayCollection();
-        $this->enfants = new ArrayCollection();
-
+    public function getEmployee()
+    {
+        return $this->employee;
     }
-
 
     /**
      * @param mixed $employee
@@ -141,6 +147,19 @@ class transport
     {
         $this->employee = $employee;
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="enfant", mappedBy="transport")
+     * @ORM\JoinColumn(name="enfant_id", referencedColumnName="id")
+     */
+    private $enfants;
+
+    public function __construct() {
+        $this->enfants = new ArrayCollection();
+
+    }
+
+
 
     /**
      * @var int

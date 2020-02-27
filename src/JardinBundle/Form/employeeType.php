@@ -16,12 +16,16 @@ class employeeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('cin')->add('diplomes')->add('cv')->add('infSup')->add('Transport',EntityType::class ,[
-            'class' => transport::class,
+        $builder
+            ->add('disponible')
+            ->add('cin')
+            ->add('diplomes')
+            ->add('cv')
+            ->add('infSup')
 
-            // uses the User.username property as the visible option string
-            'choice_label' => 'titre',
-            ]);
+            ;
+
+
     }/**
      * {@inheritdoc}
      */

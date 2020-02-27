@@ -19,8 +19,8 @@ class transportController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $transports = $em->getRepository('JardinBundle:transport')->findAll();
+        $user = $this->getUser()->getId();
+        $transports = $em->getRepository('JardinBundle:transport')->findBy(array("employee"=>$user));
 
         return $this->render('transport/index.html.twig', array(
             'transports' => $transports,
@@ -36,7 +36,6 @@ class transportController extends Controller
         $transport = new Transport();
         $form = $this->createForm('JardinBundle\Form\transportType', $transport);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($transport);
@@ -92,16 +91,12 @@ class transportController extends Controller
      * Deletes a transport entity.
      *
      */
-    public function deleteAction(Request $request, transport $transport)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($transport);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($transport);
-            $em->flush();
-        }
+        $em=$this->getDoctrine()->getManager();
+        $transport=$em->getRepository(transport::class)->find($id);
+        $em->remove($transport);
+        $em->flush();
 
         return $this->redirectToRoute('transport_index');
     }

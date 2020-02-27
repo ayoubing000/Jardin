@@ -74,7 +74,7 @@ class enfant
      * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\transport", inversedBy="enfants")
      * @ORM\JoinColumn(name="transport_id",referencedColumnName="id")
      */
-    private $Transport;
+    private $transport;
 
     /**
      * @return mixed
@@ -89,16 +89,18 @@ class enfant
      */
     public function getTransport()
     {
-        return $this->Transport;
+        return $this->transport;
     }
 
     /**
-     * @param mixed $Transport
+     * @param mixed $transport
      */
-    public function setTransport($Transport)
+    public function setTransport($transport)
     {
-        $this->Transport = $Transport;
+        $this->transport = $transport;
     }
+
+
 
     /**
      * @param mixed $abonnment

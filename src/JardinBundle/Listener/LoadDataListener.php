@@ -43,6 +43,7 @@ class LoadDataListener
             //optional calendar event settings
             $eventEntity->setId($schedule->getId());
             $eventEntity->setStartDate($schedule->getDateDebut());
+            $eventEntity->setEndDate($schedule->getDateFin());
             $eventEntity->setAllDay(false); // default is false, set to true if this is an all day event
             $eventEntity->setEditable(false);
             $eventEntity->setStartEditable(false);

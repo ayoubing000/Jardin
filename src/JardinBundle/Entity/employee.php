@@ -1,6 +1,8 @@
 <?php
 
 namespace JardinBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use  Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as FosUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,7 +25,7 @@ class employee extends FosUser
 
     /**
      * @var int
-     *
+     * @Assert\Regex("/^[0-9]{8}$/")
      * @ORM\Column(name="cin", type="integer")
      */
     private $cin;
@@ -36,26 +38,53 @@ class employee extends FosUser
     private $diplomes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\transport", inversedBy="employees")
-     * @ORM\JoinColumn(name="transport_id",referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="JardinBundle\Entity\transport", mappedBy="employee")
+     * @ORM\JoinColumn(name="transport_id", referencedColumnName="id")
      */
-    private $Transport;
+    private $transport;
+    public function __construct()
+    {
+        $this->transport = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\Column(name="disponible", type="boolean")
+     */
+    private $disponible = false;
+
+    /**
+     * @return bool
+     */
+    public function isDisponible(): bool
+    {
+        return $this->disponible;
+    }
+
+    /**
+     * @param bool $disponible
+     */
+    public function setDisponible(bool $disponible)
+    {
+        $this->disponible = $disponible;
+    }
 
     /**
      * @return mixed
      */
     public function getTransport()
     {
-        return $this->Transport;
+        return $this->transport;
     }
 
     /**
-     * @param mixed $Transport
+     * @param mixed $transport
      */
-    public function setTransport($Transport)
+    public function setTransport($transport)
     {
-        $this->Transport = $Transport;
+        $this->transport = $transport;
     }
+
+
 
 
     /**

@@ -1,6 +1,8 @@
-
+{% extends'::base_admin.html.twig' %}
 {% block body %}
-    <h1>Employee edit</h1>
+<div class="content-page">
+    <div class="content" style="background: white">
+    <h1>chauffeur edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -17,4 +19,6 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+        </div>
+</div>
 {% endblock %}
