@@ -33,3 +33,12 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    JardinBundle.service.listener:
+        class: JardinBundle\Listener\LoadDataListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data' , method:  loadData }
+
+
+
+
+

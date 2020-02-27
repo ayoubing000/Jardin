@@ -1,0 +1,42 @@
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+{% block body %}
+
+<div class="content-page">
+    <div class="content" style="background: white">
+
+        <div id="conteneur">
+            <h1 id="header"> <a href="#" title="Colored Design - Accueil"><span>Contrat</span></a></h1>
+
+
+            <table  style="width:100%">
+                <tr>
+                    <th>id</th>
+                    <th>type</th>
+                    <th>nom employee</th>
+                    <th>date de Signature </th>
+                    <th>date debut </th>
+                    <th>date fin </th>
+                    <th>date de resiliation </th>
+                </tr>
+                <tr>
+                    <td>{{ contrat.id }}</td>
+                    <td>{{ contrat.type }}</td>
+                    <td>{{ contrat.employ }}</td>
+                    <td>{% if contrat.dateSignature %}{{ contrat.dateSignature | date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if contrat.dateDebut %}{{ contrat.dateDebut | date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if contrat.dateFin %}{{ contrat.dateFin | date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if contrat.dateResiliation %}{{ contrat.dateResiliation | date('Y-m-d') }}{% endif %}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

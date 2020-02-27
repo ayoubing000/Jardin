@@ -101,4 +101,9 @@ fos_user:
   registration:
     confirmation:
       template:   '@FOSUser/Registration/email.txt.twig'
-      enabled: true
+      enabled: false
+knp_snappy:
+  pdf:
+    enabled:    true
+    binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+    options:    []

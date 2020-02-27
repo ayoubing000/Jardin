@@ -1,0 +1,19 @@
+
+{% extends '::base_user.html.twig' %}
+{% block main %}
+<h1 align="center"> rechercher un emploi</h1>
+
+
+
+    {% if emplois != null %}
+    {% for s in emplois %}
+   <h4 align="center">l'id est :{{ s.id }}</h4>
+    <h4 align="center">le jour est le {{ s.jour | date('Y-m-d')   }}</h4>
+        <h4 align="center"> la description est :{{ s.description }}</h4>
+
+{% endfor %}
+
+{% else %}
+<h4 align="center">  nothing </h4>
+{% endif %}
+{% endblock %}

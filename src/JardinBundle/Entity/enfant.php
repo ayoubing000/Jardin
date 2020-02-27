@@ -57,7 +57,7 @@ class enfant
     private $age;
 
     /**
-     * @ORM\ManyToOne(targetEntity="abonnemant")
+     * @ORM\ManyToOne(targetEntity="abonnement")
      * @ORM\JoinColumn(name="matricul_abn",referencedColumnName="id")
      */
 

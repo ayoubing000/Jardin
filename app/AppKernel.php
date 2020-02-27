@@ -19,6 +19,11 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new JardinBundle\JardinBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
+
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

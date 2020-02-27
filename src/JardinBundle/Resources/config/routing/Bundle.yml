@@ -1,0 +1,3 @@
+generate_pdf:
+  path:     /pdf/{id}
+  defaults: { _controller: "JardinBundle:Bundle:pdf" }

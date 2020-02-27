@@ -2,6 +2,9 @@ jardin_homepage:
     path:     /
     defaults: { _controller: JardinBundle:Default:index }
 
+calendar:
+    path:       /calendar
+    defaults:   {_controller: JardinBundle:Default:Calendar}
 user_home:
     path:       /user-home
     defaults:   {_controller: JardinBundle:Main:userHome }
@@ -9,3 +12,28 @@ user_home:
 events_feature:
     resource: "@JardinBundle/Resources/config/routing/events.yml"
     prefix:   /dashboard/events
+
+employee_route:
+    resource: "@JardinBundle/Resources/config/routing/employee.yml"
+    prefix:   /user_home/employee
+jardin_user:
+    resource: "@JardinBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+jardin_contrat:
+    resource: "@JardinBundle/Resources/config/routing/contrat.yml"
+    prefix:   /user_home/contrat
+jardin_emploi:
+    resource: "@JardinBundle/Resources/config/routing/emploi.yml"
+    prefix:   /user_home/emploi
+
+Bundle_extern:
+    resource: "@JardinBundle/Resources/config/routing/Bundle.yml"
+    prefix:   /generate
+
+ancarebeca_full_calendar_load:
+    path:     /full-calendar/load
+    defaults: { _controller: JardinBundle:Calendar:load }
+
+calandar:
+    resource: "@JardinBundle/Resources/config/routing/emploi.yml"
+    prefix:   /user_home/emploi

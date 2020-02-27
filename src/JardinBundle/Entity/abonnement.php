@@ -50,7 +50,7 @@ class abonnement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="enfant")
+     * @ORM\OneToMany(targetEntity="enfant", mappedBy="abonnment")
      * @ORM\JoinColumn(name="matricul_enfant",referencedColumnName="id")
      */
 

@@ -13,6 +13,48 @@ use Doctrine\ORM\Mapping as ORM;
 class employee extends FosUser
 {
     /**
+     * @return mixed
+     */
+    public function getContrats()
+    {
+        return $this->contrats;
+    }
+
+    /**
+     * @param mixed $contrats
+     */
+    public function setContrats($contrats)
+    {
+        $this->contrats = $contrats;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmplois()
+    {
+        return $this->emplois;
+    }
+
+    /**
+     * @param mixed $emplois
+     */
+    public function setEmplois($emplois)
+    {
+        $this->emplois = $emplois;
+    }
+    // ...
+
+    /**
+ * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\contrat", inversedBy="employ")
+ */
+    private $contrats;
+    /**
+     * @ORM\ManyToOne(targetEntity="JardinBundle\Entity\emploi", inversedBy="employees")
+     */
+    private $emplois;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -34,6 +76,28 @@ class employee extends FosUser
      * @ORM\Column(name="diplomes", type="string", length=255)
      */
     private $diplomes;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * @var string

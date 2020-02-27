@@ -1,0 +1,55 @@
+{% extends  '::base_admin.html.twig' %}
+
+{% block body %}
+
+    <div class="content-page">
+    <div class="content" style="background: white">
+
+
+    <h1>Employees list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>nom</th>
+                <th>Cin</th>
+                <th>Diplomes</th>
+                <th>Cv</th>
+                <th>Infsup</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td><a href="{{ path('employee_show', { 'id': employee.id }) }}">{{ employee.id }}</a></td>
+                <td>{{ employee.username }}</td>
+                <td>{{ employee.cin }}</td>
+                <td>{{ employee.diplomes }}</td>
+                <td>{{ employee.cv }}</td>
+                <td>{{ employee.infSup }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('employee_show', { 'id': employee.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('employee_edit', { 'id': employee.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('employee_new') }}">Create a new employee</a>
+        </li>
+    </ul>
+</div>
+</div>
+
+{% endblock %}

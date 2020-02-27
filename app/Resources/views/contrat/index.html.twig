@@ -1,0 +1,66 @@
+{% extends '::base_admin.html.twig' %}
+
+{% block body %}
+
+<div class="content-page">
+    <div class="content" style="background: white">
+    <h1>Contrats list</h1>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#souhaib tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+        <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+     <br>
+        <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Datesignature</th>
+                <th>Datedebut</th>
+                <th>Datefin</th>
+                <th>Dateresiliation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="souhaib">
+        {% for contrat in contrats %}
+            <tr>
+                <td><a href="{{ path('contrat_show', { 'id': contrat.id }) }}">{{ contrat.id }}</a></td>
+                <td>{{ contrat.type }}</td>
+                <td>{% if contrat.dateSignature %}{{ contrat.dateSignature|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if contrat.dateDebut %}{{ contrat.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if contrat.dateFin %}{{ contrat.dateFin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if contrat.dateResiliation %}{{ contrat.dateResiliation|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('generate_pdf', { 'id': contrat.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contrat_edit', { 'id': contrat.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contrat_new') }}">Create a new contrat</a>
+        </li>
+    </ul>
+    </div>
+</div>
+{% endblock %}

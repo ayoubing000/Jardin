@@ -1,0 +1,27 @@
+emploi_index:
+    path:     /
+    defaults: { _controller: "JardinBundle:emploi:index" }
+    methods:  GET
+
+emploi_show:
+    path:     /{id}/show
+    defaults: { _controller: "JardinBundle:emploi:show" }
+    methods:  GET
+
+emploi_new:
+    path:     /new
+    defaults: { _controller: "JardinBundle:emploi:new" }
+    methods:  [GET, POST]
+
+emploi_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "JardinBundle:emploi:edit" }
+    methods:  [GET, POST]
+
+emploi_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "JardinBundle:emploi:delete" }
+    methods:  DELETE
+emploi_findid:
+    path: /findid
+    defaults : { _controller: "JardinBundle:emploi:findi"}

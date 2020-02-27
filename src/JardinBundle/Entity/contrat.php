@@ -2,7 +2,10 @@
 
 namespace JardinBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * contrat
@@ -12,6 +15,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class contrat
 {
+    /**
+     * @return mixed
+     */
+    public function getEmploy()
+    {
+        return $this->employ;
+    }
+
+    /**
+     * @param mixed $employ
+     */
+    public function setEmploy($employ)
+    {
+        $this->employ = $employ;
+    }
+    /**
+     * @ORM\OneToOne(targetEntity="JardinBundle\Entity\employee", inversedBy="contrats")
+     */
+    private $employ;
+
     /**
      * @var int
      *
@@ -36,23 +59,29 @@ class contrat
     private $dateSignature;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_debut", type="date")
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @ORM\Column(name="date_debut", type="datetime")
      */
     private $dateDebut;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_fin", type="date")
+     * @var DateTime
+     * @Assert\DateTime()
+     * @Assert\Type(type="DateTime")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
+     * @ORM\Column(name="date_fin", type="datetime")
      */
     private $dateFin;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_resiliation", type="date")
+     * @var DateTime
+     * @Assert\DateTime()
+     *  @Assert\Type(type="DateTime")
+     * @Assert\GreaterThan(propertyPath="dateDebut")
+     * @Assert\LessThan(propertyPath="dateFin")
+     * @ORM\Column(name="date_resiliation", type="datetime")
      */
     private $dateResiliation;
 

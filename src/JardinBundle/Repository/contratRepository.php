@@ -10,4 +10,5 @@ namespace JardinBundle\Repository;
  */
 class contratRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }
