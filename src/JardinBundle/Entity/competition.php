@@ -49,6 +49,33 @@ class competition
      */
     private $dateDebut;
 
+
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="club", inversedBy="compet")
+     * @ORM\JoinColumn(name="club_id",referencedColumnName="id")
+     */
+    private  $club;
+
+    /**
+     * @return mixed
+     */
+    public function getClub()
+    {
+        return $this->club;
+    }
+
+    /**
+     * @param mixed $club
+     */
+    public function setClub($club)
+    {
+        $this->club = $club;
+    }
+
+
     /**
      * @var \DateTime
      *
@@ -66,7 +93,7 @@ class competition
     /**
      * @var array
      *
-     * @ORM\Column(name="membre", type="array")
+     * @ORM\Column(name="membre",type="string", length=255)
      */
     private $membre;
 

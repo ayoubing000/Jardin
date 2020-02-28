@@ -1,0 +1,26 @@
+{% extends 'base_admin.html.twig' %}
+      {% block body %}
+<h1 align="center"> liste des repas</h1>
+<table border="1" align="center">
+<tr>
+    <td>libelle</td>
+    <td>date</td>
+    <td>prix</td>
+    <td>description</td>
+</tr>
+<tr>
+    {% if repa != null %}
+    {% for s in repa %}
+    <td>{{ s.libelle }}</td>
+    <td>{{ s.date | date('Y-m-d')   }}</td>
+    <td>{{ s.prix }}</td>
+    <td>{{ s.description }}</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+    <tr> nothing </tr>
+{% endif %}
+{% endblock %}
+
+

@@ -1,3 +1,7 @@
+jardin_competition:
+    resource: "@JardinBundle/Controller/competitionController.php"
+    type:     annotation
+
 jardin:
     resource: "@JardinBundle/Resources/config/routing.yml"
     prefix:   /

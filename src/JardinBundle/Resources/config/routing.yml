@@ -6,6 +6,128 @@ user_home:
     path:       /user-home
     defaults:   {_controller: JardinBundle:Main:userHome }
 
-events_feature:
-    resource: "@JardinBundle/Resources/config/routing/events.yml"
-    prefix:   /dashboard/events
+
+
+club_index:
+    path:     /l
+    defaults: { _controller: "JardinBundle:club:index" }
+    methods:  GET
+
+club_show:
+    path:     /{id}/show
+    defaults: { _controller: "JardinBundle:club:show" }
+    methods:  GET
+
+club_new:
+    path:     /new
+    defaults: { _controller: "JardinBundle:club:new" }
+    methods:  [GET, POST]
+
+club_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "JardinBundle:club:edit" }
+    methods:  [GET, POST]
+
+club_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "JardinBundle:club:delete" }
+    methods:  DELETE
+yes_index:
+    path:     /c
+    defaults: { _controller: "JardinBundle:competition:index" }
+    methods:  GET
+
+yes_show:
+    path:     /{id}/cshow
+    defaults: { _controller: "JardinBundle:competition:show" }
+    methods:  GET
+
+yes_new:
+    path:     /cnew
+    defaults: { _controller: "JardinBundle:competition:new" }
+    methods:  [GET, POST]
+
+yes_edit:
+    path:     /{id}/cedit
+    defaults: { _controller: "JardinBundle:competition:edit" }
+    methods:  [GET, POST]
+
+yes_delete:
+    path:     /{id}/cdelete
+    defaults: { _controller: "JardinBundle:competition:delete" }
+    methods:  DELETE
+
+ajouter_repa:
+    path:     /ajouter_repa
+    defaults: { _controller: JardinBundle:Repa:Ajouter }
+
+afficher_repa:
+    path:     /afficher_repa
+    defaults: { _controller: JardinBundle:Repa:affiche }
+
+modifier_repa:
+    path:     /modifier_repa/{id}
+    defaults: { _controller: JardinBundle:Repa:update }
+
+supprimer_repa:
+    path:     /supprimer_repa/{id}
+    defaults: { _controller: JardinBundle:Repa:supprimer }
+
+repaDetails:
+    path:     /repaDetails/{id}
+    defaults: { _controller: JardinBundle:Repa:repaDetails }
+
+ajouter_repaextra:
+    path:     /ajouter_repaextra
+    defaults: { _controller: JardinBundle:Repa:AjouterRepaextra }
+
+afficher_repaextra:
+    path:     /afficher_repaextra
+    defaults: { _controller: JardinBundle:Repa:afficheRepaextra }
+
+modifier_repaextra:
+    path:     /modifier_repaextra/{id}
+    defaults: { _controller: JardinBundle:Repa:updateRepaextra }
+
+supprimer_repaextra:
+    path:     /supprimer_repaextra/{id}
+    defaults: { _controller: JardinBundle:Repa:supprimerRepaextra }
+
+repaDetailsextra:
+    path:     /repaDetailsextra/{id}
+    defaults: { _controller: JardinBundle:Repa:repaDetailsextra }
+
+export:
+    path:     /export
+    defaults: { _controller: JardinBundle:Repa:export }
+
+exportextra:
+    path:     /exportextra
+    defaults: { _controller: JardinBundle:Repa:exportextra }
+
+afficher_repa_front:
+    path:     /afficher_repa_front
+    defaults: { _controller: JardinBundle:Repa:afficheRepaFront }
+
+afficher_repaextra_front:
+    path:     /afficher_repaextra_front
+    defaults: { _controller: JardinBundle:Repa:afficheRepaextraFront }
+
+repaDetailsFront:
+    path:     /repaDetailfr/{id}
+    defaults: { _controller: JardinBundle:Repa:repaDetailsFront }
+
+repaextraDetailsFront:
+    path:     /repaeDetailf/{id}
+    defaults: { _controller: JardinBundle:Repa:repaextraDetailsFront }
+
+supprimer_enfant:
+    path:     /supprimer_enfant/{id}
+    defaults: { _controller: JardinBundle:Repa:supprimerE }
+
+supprimer_enfantextra:
+    path:     /supprimer_enfantextra/{id}
+    defaults: { _controller: JardinBundle:Repa:supprimerEleveextra }
+repa_findid:
+    path: /findid
+    defaults : { _controller: JardinBundle:Repa:findi}

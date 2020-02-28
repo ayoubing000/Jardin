@@ -49,6 +49,29 @@ class employee extends FosUser
      */
     private $infSup;
 
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="club", inversedBy="employes")
+     * @ORM\JoinColumn(name="club_id",referencedColumnName="id")
+     */
+    private  $club;
+
+    /**
+     * @return mixed
+     */
+    public function getClub()
+    {
+        return $this->club;
+    }
+
+    /**
+     * @param mixed $club
+     */
+    public function setClub($club)
+    {
+        $this->club = $club;
+    }
+
 
     /**
      * Get id

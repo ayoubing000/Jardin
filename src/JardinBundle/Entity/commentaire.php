@@ -5,12 +5,12 @@ namespace JardinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * commentaire
+ * Commentaire
  *
  * @ORM\Table(name="commentaire")
- * @ORM\Entity(repositoryClass="JardinBundle\Repository\commentaireRepository")
+ * @ORM\Entity(repositoryClass="JardinBundle\Repository\CommentaireRepository")
  */
-class commentaire
+class Commentaire
 {
     /**
      * @var int
@@ -22,20 +22,16 @@ class commentaire
     private $id;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date")
-     */
-    private $date;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenue", type="text", nullable=true)
      */
-    private $contenu;
-
-
+    private $contenue;
+    /**
+     * @ORM\ManyToOne(targetEntity="Repa")
+     * @ORM\JoinColumn(name="id_repa",referencedColumnName="id")
+     */
+    private $repa;
 
     /**
      * Get id
@@ -48,51 +44,85 @@ class commentaire
     }
 
     /**
-     * Set date
+     * Set contenue
      *
-     * @param \DateTime $date
+     * @param string $contenue
      *
-     * @return commentaire
+     * @return Commentaire
      */
-    public function setDate($date)
+    public function setContenue($contenue)
     {
-        $this->date = $date;
+        $this->contenue = $contenue;
 
         return $this;
     }
-
-    /**
-     * Get date
+        /**
+     * @var \DateTime
      *
-     * @return \DateTime
+     * @ORM\Column(name="datecreate", type="datetime", nullable=true)
      */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
+    private $datecreate;
     /**
-     * Set contenu
-     *
-     * @param string $contenu
-     *
-     * @return commentaire
-     */
-    public function setContenu($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get contenu
+     * Get contenue
      *
      * @return string
      */
-    public function getContenu()
+    public function getContenue()
     {
-        return $this->contenu;
+        return $this->contenue;
+    }
+
+            /**
+     * @return mixed
+     */
+    public function getRepa()
+    {
+        return $this->repa;
+    }
+
+    /**
+     * @param mixed $repa
+     */
+    public function setRepa($repa)
+    {
+        $this->repa = $repa;
+    }
+            /**
+     * @return \DateTime
+     */
+    public function getDatecreate()
+    {
+        return $this->datecreate;
+    }
+
+    /**
+     * @param \DateTime $datecreate
+     */
+    public function setDatecreate($datecreate)
+    {
+        $this->datecreate = $datecreate;
+    }
+
+ /**
+     * @ORM\Column(type="integer",length=11, nullable=true)
+     */
+    private $rating;
+
+
+        /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 }
 

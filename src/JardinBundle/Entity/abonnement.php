@@ -50,7 +50,7 @@ class abonnement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="enfant")
+     * @ORM\OneToMany(targetEntity="enfant",mappedBy="abonnement")
      * @ORM\JoinColumn(name="matricul_enfant",referencedColumnName="id")
      */
 
@@ -59,18 +59,7 @@ class abonnement
     /**
      * @return mixed
      */
-    public function getParents()
-    {
-        return $this->parents;
-    }
 
-    /**
-     * @param mixed $parents
-     */
-    public function setParents($parents)
-    {
-        $this->parents = $parents;
-    }
 
     /**
      * Get id

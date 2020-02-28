@@ -42,7 +42,7 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
         if (in_array('ROLE_ADMIN', $rolesNames, true)){
             $redirection = new RedirectResponse($this->router->generate('user_home'));
         }else{
-            $redirection = new RedirectResponse($this->router->generate('events_list'));
+            $redirection = new RedirectResponse($this->router->generate('club_index'));
         }
 
 

@@ -1,3 +1,0 @@
-events_list:
-    path:     /list
-    defaults: { _controller: "JardinBundle:Default:index" }

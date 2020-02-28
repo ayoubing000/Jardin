@@ -31,7 +31,7 @@ class club
     /**
      * @var array
      *
-     * @ORM\Column(name="activite", type="array")
+     * @ORM\Column(name="activite", type="string", length=255)
      */
     private $activite;
 
@@ -42,12 +42,85 @@ class club
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="enfant",mappedBy="club")
+     * @ORM\JoinColumn(name="club_id",referencedColumnName="id")
+     */
+
+    private  $enfants ;
+
+    /**
+     * @return mixed
+     */
+    public function getEnfants()
+    {
+        return $this->enfants;
+    }
+
+    /**
+     * @param mixed $enfants
+     */
+    public function setEnfants($enfants)
+    {
+        $this->enfants = $enfants;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="competition",mappedBy="club")
+     * @ORM\JoinColumn(name="club_id",referencedColumnName="id")
+     */
+
+    private  $compet ;
+
+    /**
+     * @return mixed
+     */
+    public function getCompet()
+    {
+        return $this->compet;
+    }
+
+    /**
+     * @param mixed $compet
+     */
+    public function setCompet($compet)
+    {
+        $this->compet = $compet;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="employee",mappedBy="club")
+     * @ORM\JoinColumn(name="club_id",referencedColumnName="id")
+     */
+
+    private  $employes ;
+
+    /**
+     * @return mixed
+     */
+    public function getEmployes()
+    {
+        return $this->employes;
+    }
+
+    /**
+     * @param mixed $employes
+     */
+    public function setEmployes($employes)
+    {
+        $this->employes = $employes;
+    }
+
+
 
     /**
      * Get id
      *
      * @return int
      */
+
+
+
     public function getId()
     {
         return $this->id;
@@ -123,6 +196,10 @@ class club
     public function getType()
     {
         return $this->type;
+    }
+    public function __toString()
+    {
+        return (String) $this->id;
     }
 }
 
